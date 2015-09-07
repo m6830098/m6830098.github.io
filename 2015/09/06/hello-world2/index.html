@@ -16,8 +16,9 @@
 普通拉伸图片带边框的图片如果实用常规的缩放，边框部分会按照缩放比例拉伸或者压缩，会导致图片变形。 例如下面这样：  
 我们有这样一张图片：  
  .
+&amp;lt;!--Read More--&amp;gt;
 我们将一个button的背景设置为这张图片,代码如下：  
-1234567self.view.backgroundColor = [UIColor whiteColor];_purpleButton=">
+1234567self.view.backgroundColor = [UIColor whiteColo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用UIEdgeInsetsMake对UIImage缩放与拉伸">
 <meta property="og:url" content="http://yoursite.com/2015/09/06/hello-world2/index.html">
@@ -27,12 +28,13 @@
 普通拉伸图片带边框的图片如果实用常规的缩放，边框部分会按照缩放比例拉伸或者压缩，会导致图片变形。 例如下面这样：  
 我们有这样一张图片：  
  .
+&amp;lt;!--Read More--&amp;gt;
 我们将一个button的背景设置为这张图片,代码如下：  
-1234567self.view.backgroundColor = [UIColor whiteColor];_purpleButton=">
+1234567self.view.backgroundColor = [UIColor whiteColo">
 <meta property="og:image" content="http://7mnn5k.com1.z0.glb.clouddn.com/purple_button@2x.png">
 <meta property="og:image" content="http://7mnn5k.com1.z0.glb.clouddn.com/button.png">
 <meta property="og:image" content="http://7mnn5k.com1.z0.glb.clouddn.com/button_end.png">
-<meta property="og:updated_time" content="2015-09-07T03:10:45.000Z">
+<meta property="og:updated_time" content="2015-09-07T03:14:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用UIEdgeInsetsMake对UIImage缩放与拉伸">
 <meta name="twitter:description" content="UIImage缩放标签（空格分隔）： UI设计
@@ -40,8 +42,9 @@
 普通拉伸图片带边框的图片如果实用常规的缩放，边框部分会按照缩放比例拉伸或者压缩，会导致图片变形。 例如下面这样：  
 我们有这样一张图片：  
  .
+&amp;lt;!--Read More--&amp;gt;
 我们将一个button的背景设置为这张图片,代码如下：  
-1234567self.view.backgroundColor = [UIColor whiteColor];_purpleButton=">
+1234567self.view.backgroundColor = [UIColor whiteColo">
 
     
     <link rel="alternative" href="/atom.xml" title="个人博客" type="application/atom+xml">
@@ -126,9 +129,9 @@
 <h2 id="普通拉伸图片">普通拉伸图片</h2><p>带边框的图片如果实用常规的缩放，边框部分会按照缩放比例拉伸或者压缩，会导致图片变形。 例如下面这样：  </p>
 <p>我们有这样一张图片：  </p>
 <p><img src="http://7mnn5k.com1.z0.glb.clouddn.com/purple_button@2x.png" alt=""> .</p>
+<!--Read More-->
 <p>我们将一个button的背景设置为这张图片,代码如下：  </p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">self</span><span class="variable">.view</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> whiteColor];</span><br><span class="line"></span><br><span class="line">_purpleButton= [[<span class="built_in">UIButton</span> alloc]initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">50</span>, <span class="number">130</span>, <span class="number">200</span>, <span class="number">100</span>)];</span><br><span class="line">[_purpleButton setTitle:<span class="string">@"Test Button"</span> forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line"><span class="built_in">UIImage</span> *buttonImage = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"purple_button@2x.png"</span>];</span><br><span class="line">[_purpleButton setBackgroundImage:buttonImage forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">[<span class="keyword">self</span><span class="variable">.view</span> addSubview:_purpleButton];</span><br></pre></td></tr></table></figure>
-<!--Read More-->
 <p>图片的大小比button的frame小，会自动将图片进行拉伸，拉伸的效果如下： </p>
 <p><img src="http://7mnn5k.com1.z0.glb.clouddn.com/button.png" alt=""> .    </p>
 <h2 id="resizableImageWithCapInsets">resizableImageWithCapInsets</h2><p>显然这并不是我们想要的效果。  左右边框由于按钮frame过大被过度拉伸。 iOS中有一个方法提供给开发者使用。叫做<code>resizableImageWithCapInsets:</code>：以某一偏移值为偏移的可伸缩图像（保证偏移值内的图像不被拉伸或者压缩）  </p>
