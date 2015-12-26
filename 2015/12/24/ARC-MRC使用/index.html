@@ -29,7 +29,7 @@ Objective-C">
 <meta property="og:image" content="http://7mnn5k.com1.z0.glb.clouddn.com/屏幕快照%202015-12-21%20下午4.48.10.png">
 <meta property="og:image" content="http://7mnn5k.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202015-12-21%20%E4%B8%8B%E5%8D%884.52.16.png">
 <meta property="og:image" content="http://7mnn5k.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202015-12-21%20%E4%B8%8B%E5%8D%884.52.16.png">
-<meta property="og:updated_time" content="2015-12-26T09:08:40.000Z">
+<meta property="og:updated_time" content="2015-12-26T09:10:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ARC/MRC使用">
 <meta name="twitter:description" content="ARC 与 MRC总结
@@ -122,10 +122,10 @@ Objective-C">
 <p><a href="http://rypress.com/tutorials/objective-c/properties" target="_blank" rel="external">Properties相关介绍</a><br><a href="http://rypress.com/tutorials/objective-c/memory-management" target="_blank" rel="external">Memory Management</a><br><a href="http://www.yifeiyang.net/development-of-the-iphone-simply-1/" target="_blank" rel="external">iPhone开发之深入浅出(1)-ARC是什么</a><br><a href="http://www.cnblogs.com/zilongshanren/archive/2011/08/08/2123993.html" target="_blank" rel="external">在Objective-c里面使用property教程</a><br><a href="http://www.yifeiyang.net/development-of-the-iphone-simply-3/" target="_blank" rel="external">iPhone开发之深入浅出 (3) — ARC之前世今生</a></p>
 <h1 id="Objective-C_内存管理之引用计数">Objective-C 内存管理之引用计数</h1><p>对象生成的时候必定被某个持有者拿着，如果有多个持有者的话，其引用计数就会递增；相反失去一个持有者那么引用计数即会递减，直到失去所有的持有者，才真正地从内测中释放自己。</p>
 <p><img src="http://7mnn5k.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202015-12-23%20%E4%B8%8B%E5%8D%883.40.26.png" alt="引用计数">  </p>
+<a id="more"></a>
 <p>关于引用计数的引用，<strong>Objective-C高级编程iOS和OS X多线程和内存管理</strong> 这本书籍中有个很好的例子。  以开关房间的灯为例子介绍引用计数机制。<br><img src="http://7mnn5k.com1.z0.glb.clouddn.com/屏幕快照%202015-12-21%20下午4.48.10.png" alt=""></p>
 <p><img src="http://7mnn5k.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202015-12-21%20%E4%B8%8B%E5%8D%884.52.16.png" alt="此处输入图片的描述"></p>
 <p><img src="http://7mnn5k.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202015-12-21%20%E4%B8%8B%E5%8D%884.52.16.png" alt="引用计数"></p>
-<!--Read More-->
 <p>规则：</p>
 <ul>
 <li><strong>自己生成的对象，自己所持有，  用alloc/new/copy/mutablecopy 名称开头的方法创建的对象。</strong>—&gt;生成对象并持有所有权。</li>
