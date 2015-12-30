@@ -29,7 +29,7 @@ Objective-C">
 <meta property="og:image" content="http://7mnn5k.com1.z0.glb.clouddn.com/屏幕快照%202015-12-21%20下午4.48.10.png">
 <meta property="og:image" content="http://7mnn5k.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202015-12-21%20%E4%B8%8B%E5%8D%884.52.16.png">
 <meta property="og:image" content="http://7mnn5k.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202015-12-21%20%E4%B8%8B%E5%8D%884.52.16.png">
-<meta property="og:updated_time" content="2015-12-30T08:35:53.000Z">
+<meta property="og:updated_time" content="2015-12-30T08:43:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ARC/MRC使用">
 <meta name="twitter:description" content="ARC 与 MRC总结
@@ -133,16 +133,19 @@ Objective-C">
 </ul>
 <p>用<code>alloc/new/copy/mutablecopy</code> 名称以外开头的方法创建的对象，属于非自己生成并持有的对象。比如说<code>id  obj = [NSMutableArray array]</code>。这句<strong>代码只是取的了一个非自己生成并持有的对象</strong>， 但是<strong>变量 obj目前并不持有这个生成的对象</strong>，那么如何持有这个对象呢，使用<code>retain</code>方法。</p>
 <p>通过<code>alloc/new/copy/mutablecopy</code> 名称开头的方法创建的对象表示自己生成的对象自己所持有，那么具体代码实现应该是怎么样的呢： 原封不动的返回用alloc生成并持有的对象，就能让这个方法的调用方生成并持有该创建的对象。注意这里方法的名字是以<code>alloc</code>为前缀的。</p>
-<p>`  </p>
-<ul>
-<li>(id)allocObject<br>{<br>id obj = [[NSObject alloc]init];<br>return obj;<br>}`</li>
-</ul>
-<p>   如果通过某种方法获得的对象存在但是不持有该对象，方法该如何实现呢。根据命名规则，要<code>alloc/new/copy/mutablecopy</code>之外的命名方法，因此：      </p>
-<p>`</p>
-<ul>
-<li>(id)Object<br>{<br>id obj = [[NSObject alloc]init];<br>[obj autorelease];<br>return obj;<br>}<br>`   </li>
-</ul>
-<p>  通过这个方法获得的对象表示暂时不持有该对象，可以在通过<code>retain</code>方法来持有该对象。    </p>
+<pre><code>- (<span class="keyword">id</span>)allocObject
+{
+<span class="keyword">id</span> obj = [[<span class="built_in">NSObject</span> alloc]init];
+<span class="keyword">return</span> obj;
+}
+</code></pre><p>   如果通过某种方法获得的对象存在但是不持有该对象，方法该如何实现呢。根据命名规则，要<code>alloc/new/copy/mutablecopy</code>之外的命名方法，因此：      </p>
+<pre><code>- (<span class="keyword">id</span>)Object
+{
+<span class="keyword">id</span> obj = [[<span class="built_in">NSObject</span> alloc]init];
+[obj autorelease];
+<span class="keyword">return</span> obj;
+}
+</code></pre><p>  通过这个方法获得的对象表示暂时不持有该对象，可以在通过<code>retain</code>方法来持有该对象。    </p>
 <ul>
 <li><strong>不再想持有某对象时，必须释放所有权，release方法</strong> –&gt;释放对象的所有权。</li>
 <li><strong>不能释放已经不再持有所有权的对象。。</strong>  –&gt;释放对象资源。   </li>
