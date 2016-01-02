@@ -4,26 +4,29 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Hello World | 个人博客</title>
+    <title>iOS常用方法 | 个人博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="ChenHao">
     
 
     
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+    <meta name="description" content="loadView先看看文档给的注释:    
+Creates the view that the controller manages.
+    You should never call this method directly. The view controller calls this method when its view property is requested but is cu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2015/09/06/hello-world/index.html">
+<meta property="og:title" content="iOS常用方法">
+<meta property="og:url" content="http://yoursite.com/2016/01/02/changyongfangfa/index.html">
 <meta property="og:site_name" content="个人博客">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
-<meta property="og:updated_time" content="2015-09-06T08:08:46.000Z">
+<meta property="og:description" content="loadView先看看文档给的注释:    
+Creates the view that the controller manages.
+    You should never call this method directly. The view controller calls this method when its view property is requested but is cu">
+<meta property="og:updated_time" content="2016-01-02T07:26:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="iOS常用方法">
+<meta name="twitter:description" content="loadView先看看文档给的注释:    
+Creates the view that the controller manages.
+    You should never call this method directly. The view controller calls this method when its view property is requested but is cu">
 
     
     <link rel="alternative" href="/atom.xml" title="个人博客" type="application/atom+xml">
@@ -83,14 +86,14 @@ Quick">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/09/06/hello-world/" title="Hello World" itemprop="url">Hello World</a>
+      <a href="/2016/01/02/changyongfangfa/" title="iOS常用方法" itemprop="url">iOS常用方法</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="ChenHao" target="_blank" itemprop="author">ChenHao</a>
 		
   <p class="article-time">
-    <time datetime="2015-09-06T08:08:46.000Z" itemprop="datePublished"> 發表於 2015-09-06</time>
+    <time datetime="2016-01-02T07:25:17.000Z" itemprop="datePublished"> 發表於 2016-01-02</time>
     
   </p>
 </header>
@@ -99,19 +102,27 @@ Quick">
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick_Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create_a_new_post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#loadView"><span class="toc-number">1.</span> <span class="toc-text">loadView</span></a></li></ol>
 		
 		</div>
 		
-		<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><!--Read  More -->
-<h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+		<h1 id="loadView">loadView</h1><p>先看看文档给的注释:    </p>
+<p><code>Creates the view that the controller manages.
+    You should never call this method directly. The view controller calls this method when its view property is requested but is currently nil. This method loads or creates a view and assigns it to the view property.
+    If the view controller has an associated nib file, this method loads the view from the nib file. A view controller has an associated nib file if the nibName property returns a non-nil value, which occurs if the view controller was instantiated from a storyboard, if you explicitly assigned it a nib file using the initWithNibName:bundle: method, or if iOS finds a nib file in the app bundle with a name based on the view controller&#39;s class name. If the view controller does not have an associated nib file, this method creates a plain UIView object instead.
+    If you use Interface Builder to create your views and initialize the view controller, you must not override this method.
+    You can override this method in order to create your views manually. If you choose to do so, assign the root view of your view hierarchy to the view property. The views you create should be unique instances and should not be shared with any other view controller object. Your custom implementation of this method should not call super.
+    If you want to perform any additional initialization of your views, do so in the viewDidLoad method.</code></p>
   
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/iOS总结/">iOS总结</a>
+  </div>
 
 </div>
 
@@ -119,7 +130,7 @@ Quick">
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/09/06/hello-world/" data-title="Hello World | 个人博客" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/01/02/changyongfangfa/" data-title="iOS常用方法 | 个人博客" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -132,19 +143,11 @@ Quick">
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/12/24/ARC-MRC使用/" title="ARC/MRC使用">
-  <strong>上一篇：</strong><br/>
-  <span>
-  ARC/MRC使用</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/09/06/hello-world2/"  title="使用UIEdgeInsetsMake对UIImage缩放与拉伸">
+<a href="/2015/12/24/ARC-MRC使用/"  title="ARC/MRC使用">
  <strong>下一篇：</strong><br/> 
- <span>使用UIEdgeInsetsMake对UIImage缩放与拉伸
+ <span>ARC/MRC使用
 </span>
 </a>
 </div>
@@ -159,7 +162,7 @@ Quick">
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick_Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create_a_new_post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#loadView"><span class="toc-number">1.</span> <span class="toc-text">loadView</span></a></li></ol>
  
   </div>
 
