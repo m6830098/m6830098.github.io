@@ -21,7 +21,7 @@ The view controller calls this method when its view property is requested but is
 <meta property="og:description" content="loadView先看看文档给的注释:    
 Creates the view that the controller manages.You should never call this method directly. 
 The view controller calls this method when its view property is requested but is curren">
-<meta property="og:updated_time" content="2016-01-02T07:38:01.000Z">
+<meta property="og:updated_time" content="2016-01-02T08:41:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS常用方法">
 <meta name="twitter:description" content="loadView先看看文档给的注释:    
@@ -102,7 +102,7 @@ The view controller calls this method when its view property is requested but is
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#loadView"><span class="toc-number">1.</span> <span class="toc-text">loadView</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#loadView"><span class="toc-number">1.</span> <span class="toc-text">loadView</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#viewDidLoad"><span class="toc-number">2.</span> <span class="toc-text">viewDidLoad</span></a></li></ol>
 		
 		</div>
 		
@@ -111,8 +111,23 @@ The view controller calls this method when its view property is requested but is
 <span class="type">The</span> view controller calls this <span class="keyword">method</span> <span class="keyword">when</span> its view property <span class="keyword">is</span> requested but <span class="keyword">is</span> currently <span class="keyword">nil</span>. <span class="type">This</span> <span class="keyword">method</span> loads <span class="keyword">or</span> creates a view <span class="keyword">and</span> assigns it to the view property.<span class="type">If</span> the view controller has an associated nib file, this <span class="keyword">method</span> loads the view <span class="keyword">from</span> the nib file. A view controller has an associated nib file <span class="keyword">if</span> the nibName property returns a non-<span class="keyword">nil</span> value, which occurs <span class="keyword">if</span> the view controller was instantiated <span class="keyword">from</span> a storyboard, <span class="keyword">if</span> you explicitly assigned it a nib file <span class="keyword">using</span> the initWithNibName:bundle: <span class="keyword">method</span>, <span class="keyword">or</span> <span class="keyword">if</span> iOS finds a nib file <span class="keyword">in</span> the app bundle <span class="keyword">with</span> a name based on the view controller's class name. 
 <span class="type">If</span> the view controller does <span class="keyword">not</span> have an associated nib file, this <span class="keyword">method</span> creates a plain <span class="type">UIView</span> <span class="keyword">object</span> instead.<span class="type">If</span> you use <span class="type">Interface</span> <span class="type">Builder</span> to create your views <span class="keyword">and</span> initialize the view controller, you must <span class="keyword">not</span> override this <span class="keyword">method</span>.<span class="type">You</span> can override this <span class="keyword">method</span> <span class="keyword">in</span> order to create your views manually. <span class="type">If</span> you choose to <span class="keyword">do</span> so, assign the root view <span class="keyword">of</span> your view hierarchy to the view property. 
 <span class="type">The</span> views you create should be unique instances <span class="keyword">and</span> should <span class="keyword">not</span> be <span class="literal">shared</span> <span class="keyword">with</span> <span class="type">any</span> other view controller <span class="keyword">object</span>. <span class="type">Your</span> custom implementation <span class="keyword">of</span> this <span class="keyword">method</span> should <span class="keyword">not</span> call super.
-<span class="type">If</span> you want to perform <span class="type">any</span> additional initialization <span class="keyword">of</span> your views, <span class="keyword">do</span> so <span class="keyword">in</span> the viewDidLoad <span class="keyword">method</span>.
-</code></pre>  
+<span class="type">If</span> you want to perform <span class="type">any</span> additional initialization <span class="keyword">of</span> your views, <span class="keyword">do</span> so <span class="keyword">in</span> the viewDidLoad <span class="keyword">method</span>.   
+</code></pre><a id="more"></a>     
+<p>这个接口是让我们自定义controller的view使用的，永远不要主动调用这个函数。<strong>view controller会在view的property被请求并且当前view值为nil时调用这个函数</strong>。如果你手动创建view，你应该重载这个函数。如果你用IB创建view并初始化view controller，那就意味着你使用initWithNibName:bundle:方法，这时，你不应该重载loadView函数。 </p>
+<p>这个方法的默认实现是这样：先寻找有关可用的nib文件的信息，根据这个信息来加载nib文件，<strong>如果没有有关nib文件的信息，默认实现会创建一个空白的UIView对象，然后让这个对象成为controller的主view。</strong>  所以，重载这个函数时，你也应该这么做。并把子类的view赋给view属性(property)（你create的view必须是唯一的实例，并且不被其他任何controller共享），而且你重载的这个函数不应该调用super。(好像调用了super也没什么什么问题，这里不知道为什么不让调用super)  。如果仅仅是想要在当前view上增加一些UIButton或是UILabel，应该在viewDidLoad里去做，此时不要实现自己的loadView。</p>
+<p>如果你要进行进一步初始化你的views，你应该在viewDidLoad函数中去做。在iOS 3.0以及更高版本中，你应该重载viewDidUnload函数来释放任何对view的引用或者它里面的内容（子view等等）。</p>
+<p>在 <code>loadView</code> 中通常这样使用 </p>
+<pre><code>UIView *<span class="keyword">view</span> = [[UIView alloc] init...];
+...
+[<span class="keyword">view</span> addSubvie<span class="variable">w:whatever</span>];
+[<span class="keyword">view</span> addSubvie<span class="variable">w:whatever2</span>];
+...
+self.<span class="keyword">view</span> = <span class="keyword">view</span>;
+[<span class="keyword">view</span> release]; 
+</code></pre><h1 id="viewDidLoad">viewDidLoad</h1><p>这个函数在controller加载了相关的views后被调用，<strong>而不论这些views存储在nib文件里还是在loadView函数中生成</strong>。而多数情况下是做nib文件的后续工作。    </p>
+<p>这里github上有篇讨论：  </p>
+<p><a href="http://stackoverflow.com/questions/573958/iphone-sdk-what-is-the-difference-between-loadview-and-viewdidload" target="_blank" rel="external">iPhone SDK: what is the difference between loadView and viewDidLoad?</a>   </p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -161,7 +176,7 @@ The view controller calls this method when its view property is requested but is
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#loadView"><span class="toc-number">1.</span> <span class="toc-text">loadView</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#loadView"><span class="toc-number">1.</span> <span class="toc-text">loadView</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#viewDidLoad"><span class="toc-number">2.</span> <span class="toc-text">viewDidLoad</span></a></li></ol>
  
   </div>
 
