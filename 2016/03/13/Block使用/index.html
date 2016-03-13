@@ -11,50 +11,44 @@
     
 
     
-    <meta name="description" content="#Block    
-用一张图来解释： 
+    <meta name="description" content="Block用一张图来解释： 
 block是Objective-c语言对闭包的实现:   
 
 闭包是一个函数（或指向函数的指针），再加上该函数执行的外部的上下文变量（有时候也称作自由变量）。  
 
 
+&amp;lt;!--Read More--&amp;gt;  
 #Block中变量的复制与修改.    
-block之外的变量引用,block默认是将其复制到其数据结构中来实现的。入下图：（注意是定义block的时候复制的）
-
-通过block进行闭包的变">
+block之外的变量引用,block默认是将其复制到其数据结构中来实现的。入下图：（注意是定义block的时候复制的）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Block的使用">
 <meta property="og:url" content="http://yoursite.com/2016/03/13/Block使用/index.html">
 <meta property="og:site_name" content="个人博客">
-<meta property="og:description" content="#Block    
-用一张图来解释： 
+<meta property="og:description" content="Block用一张图来解释： 
 block是Objective-c语言对闭包的实现:   
 
 闭包是一个函数（或指向函数的指针），再加上该函数执行的外部的上下文变量（有时候也称作自由变量）。  
 
 
+&amp;lt;!--Read More--&amp;gt;  
 #Block中变量的复制与修改.    
-block之外的变量引用,block默认是将其复制到其数据结构中来实现的。入下图：（注意是定义block的时候复制的）
-
-通过block进行闭包的变">
+block之外的变量引用,block默认是将其复制到其数据结构中来实现的。入下图：（注意是定义block的时候复制的）">
 <meta property="og:image" content="http://7mnn5k.com1.z0.glb.clouddn.com/1420794587351042.png">
 <meta property="og:image" content="http://7mnn5k.com1.z0.glb.clouddn.com/1420794551105637.jpg">
 <meta property="og:image" content="http://7mnn5k.com1.z0.glb.clouddn.com/1420794526449160.jpg">
 <meta property="og:image" content="http://7mnn5k.com1.z0.glb.clouddn.com/1420794487754704.jpg">
-<meta property="og:updated_time" content="2016-03-13T14:24:45.000Z">
+<meta property="og:updated_time" content="2016-03-13T14:26:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Block的使用">
-<meta name="twitter:description" content="#Block    
-用一张图来解释： 
+<meta name="twitter:description" content="Block用一张图来解释： 
 block是Objective-c语言对闭包的实现:   
 
 闭包是一个函数（或指向函数的指针），再加上该函数执行的外部的上下文变量（有时候也称作自由变量）。  
 
 
+&amp;lt;!--Read More--&amp;gt;  
 #Block中变量的复制与修改.    
-block之外的变量引用,block默认是将其复制到其数据结构中来实现的。入下图：（注意是定义block的时候复制的）
-
-通过block进行闭包的变">
+block之外的变量引用,block默认是将其复制到其数据结构中来实现的。入下图：（注意是定义block的时候复制的）">
 
     
     <link rel="alternative" href="/atom.xml" title="个人博客" type="application/atom+xml">
@@ -130,17 +124,17 @@ block之外的变量引用,block默认是将其复制到其数据结构中来实
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Block的类型"><span class="toc-number">1.</span> <span class="toc-text">Block的类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#NSConcreteGlobalBlock类型的Block"><span class="toc-number">1.1.</span> <span class="toc-text">NSConcreteGlobalBlock类型的Block</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSConcreteStackBlock_类型的Block"><span class="toc-number">1.2.</span> <span class="toc-text">NSConcreteStackBlock 类型的Block</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSConcreteMallocBlock类型的Block"><span class="toc-number">1.3.</span> <span class="toc-text">NSConcreteMallocBlock类型的Block</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Block"><span class="toc-number">1.</span> <span class="toc-text">Block</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Block的类型"><span class="toc-number">2.</span> <span class="toc-text">Block的类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#NSConcreteGlobalBlock类型的Block"><span class="toc-number">2.1.</span> <span class="toc-text">NSConcreteGlobalBlock类型的Block</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSConcreteStackBlock_类型的Block"><span class="toc-number">2.2.</span> <span class="toc-text">NSConcreteStackBlock 类型的Block</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSConcreteMallocBlock类型的Block"><span class="toc-number">2.3.</span> <span class="toc-text">NSConcreteMallocBlock类型的Block</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<p>#Block    </p>
-<p>用一张图来解释： </p>
+		<h1 id="Block">Block</h1><p>用一张图来解释： </p>
 <p><code>block</code>是<code>Objective-c</code>语言对闭包的实现:   </p>
 <blockquote>
 <p>闭包是一个函数（或指向函数的指针），再加上该函数执行的外部的上下文变量（有时候也称作自由变量）。  </p>
 </blockquote>
 <p><img src="http://7mnn5k.com1.z0.glb.clouddn.com/1420794587351042.png" alt="Block解释"></p>
+<!--Read More-->  
 <p>#Block中变量的复制与修改.    </p>
 <p>block之外的变量引用,block默认是将其<strong>复制到</strong>其数据结构中来实现的。入下图：<strong>（注意是定义block的时候复制的）</strong></p>
 <p><img src="http://7mnn5k.com1.z0.glb.clouddn.com/1420794551105637.jpg" alt="Block中变量的复制与修改"></p>
@@ -269,7 +263,7 @@ void<span class="params">(^p)</span><span class="params">()</span> = ^<span clas
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Block的类型"><span class="toc-number">1.</span> <span class="toc-text">Block的类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#NSConcreteGlobalBlock类型的Block"><span class="toc-number">1.1.</span> <span class="toc-text">NSConcreteGlobalBlock类型的Block</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSConcreteStackBlock_类型的Block"><span class="toc-number">1.2.</span> <span class="toc-text">NSConcreteStackBlock 类型的Block</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSConcreteMallocBlock类型的Block"><span class="toc-number">1.3.</span> <span class="toc-text">NSConcreteMallocBlock类型的Block</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Block"><span class="toc-number">1.</span> <span class="toc-text">Block</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Block的类型"><span class="toc-number">2.</span> <span class="toc-text">Block的类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#NSConcreteGlobalBlock类型的Block"><span class="toc-number">2.1.</span> <span class="toc-text">NSConcreteGlobalBlock类型的Block</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSConcreteStackBlock_类型的Block"><span class="toc-number">2.2.</span> <span class="toc-text">NSConcreteStackBlock 类型的Block</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NSConcreteMallocBlock类型的Block"><span class="toc-number">2.3.</span> <span class="toc-text">NSConcreteMallocBlock类型的Block</span></a></li></ol></li></ol>
  
   </div>
 
