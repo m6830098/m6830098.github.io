@@ -16,21 +16,17 @@
 普通拉伸图片带边框的图片如果实用常规的缩放，边框部分会按照缩放比例拉伸或者压缩，会导致图片变形。 例如下面这样：  
 我们有这样一张图片：  
  .
-我们将一个button的背景设置为这张图片,代码如下：  
-&amp;lt;!--More--&amp;gt;  
-1234567self.view.backgroundColor = [UIColor whiteColor];">
+我们将一个button的背景设置为这张图片,代码如下：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用UIEdgeInsetsMake对UIImage缩放与拉伸">
-<meta property="og:url" content="http://yoursite.com/2015/09/06/hello-world2/index.html">
+<meta property="og:url" content="http://yoursite.com/2015/09/06/UIEdgeInsetsMake/index.html">
 <meta property="og:site_name" content="个人博客">
 <meta property="og:description" content="UIImage缩放标签（空格分隔）： UI设计
 
 普通拉伸图片带边框的图片如果实用常规的缩放，边框部分会按照缩放比例拉伸或者压缩，会导致图片变形。 例如下面这样：  
 我们有这样一张图片：  
  .
-我们将一个button的背景设置为这张图片,代码如下：  
-&amp;lt;!--More--&amp;gt;  
-1234567self.view.backgroundColor = [UIColor whiteColor];">
+我们将一个button的背景设置为这张图片,代码如下：">
 <meta property="og:image" content="http://7mnn5k.com1.z0.glb.clouddn.com/purple_button@2x.png">
 <meta property="og:image" content="http://7mnn5k.com1.z0.glb.clouddn.com/button.png">
 <meta property="og:image" content="http://7mnn5k.com1.z0.glb.clouddn.com/button2.png">
@@ -40,7 +36,7 @@
 <meta property="og:image" content="http://7mnn5k.com1.z0.glb.clouddn.com/button_horizontal.png">
 <meta property="og:image" content="http://7mnn5k.com1.z0.glb.clouddn.com/purple_button_both-1.png">
 <meta property="og:image" content="http://7mnn5k.com1.z0.glb.clouddn.com/button_end.png">
-<meta property="og:updated_time" content="2015-12-28T01:18:54.000Z">
+<meta property="og:updated_time" content="2016-03-21T03:26:01.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用UIEdgeInsetsMake对UIImage缩放与拉伸">
 <meta name="twitter:description" content="UIImage缩放标签（空格分隔）： UI设计
@@ -48,9 +44,7 @@
 普通拉伸图片带边框的图片如果实用常规的缩放，边框部分会按照缩放比例拉伸或者压缩，会导致图片变形。 例如下面这样：  
 我们有这样一张图片：  
  .
-我们将一个button的背景设置为这张图片,代码如下：  
-&amp;lt;!--More--&amp;gt;  
-1234567self.view.backgroundColor = [UIColor whiteColor];">
+我们将一个button的背景设置为这张图片,代码如下：">
 
     
     <link rel="alternative" href="/atom.xml" title="个人博客" type="application/atom+xml">
@@ -110,7 +104,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/09/06/hello-world2/" title="使用UIEdgeInsetsMake对UIImage缩放与拉伸" itemprop="url">使用UIEdgeInsetsMake对UIImage缩放与拉伸</a>
+      <a href="/2015/09/06/UIEdgeInsetsMake/" title="使用UIEdgeInsetsMake对UIImage缩放与拉伸" itemprop="url">使用UIEdgeInsetsMake对UIImage缩放与拉伸</a>
   </h1>
   <p class="article-author">By
        
@@ -136,7 +130,7 @@
 <p>我们有这样一张图片：  </p>
 <p><img src="http://7mnn5k.com1.z0.glb.clouddn.com/purple_button@2x.png" alt=""> .</p>
 <p>我们将一个button的背景设置为这张图片,代码如下：  </p>
-<!--More-->  
+<a id="more"></a>  
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">self</span><span class="variable">.view</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> whiteColor];</span><br><span class="line"></span><br><span class="line">_purpleButton= [[<span class="built_in">UIButton</span> alloc]initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">50</span>, <span class="number">130</span>, <span class="number">200</span>, <span class="number">100</span>)];</span><br><span class="line">[_purpleButton setTitle:<span class="string">@"Test Button"</span> forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line"><span class="built_in">UIImage</span> *buttonImage = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"purple_button@2x.png"</span>];</span><br><span class="line">[_purpleButton setBackgroundImage:buttonImage forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">[<span class="keyword">self</span><span class="variable">.view</span> addSubview:_purpleButton];</span><br></pre></td></tr></table></figure>
 <p>图片的大小比button的frame小，会自动将图片进行拉伸，拉伸的效果如下： </p>
 <p><img src="http://7mnn5k.com1.z0.glb.clouddn.com/button.png" alt=""> .    </p>
@@ -227,7 +221,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/09/06/hello-world2/" data-title="使用UIEdgeInsetsMake对UIImage缩放与拉伸 | 个人博客" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2015/09/06/UIEdgeInsetsMake/" data-title="使用UIEdgeInsetsMake对UIImage缩放与拉伸 | 个人博客" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>

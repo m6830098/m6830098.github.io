@@ -314,7 +314,7 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/09/06/hello-world2/" title="使用UIEdgeInsetsMake对UIImage缩放与拉伸" itemprop="url">使用UIEdgeInsetsMake对UIImage缩放与拉伸</a>
+      <a href="/2015/09/06/UIEdgeInsetsMake/" title="使用UIEdgeInsetsMake对UIImage缩放与拉伸" itemprop="url">使用UIEdgeInsetsMake对UIImage缩放与拉伸</a>
   </h1>
   <p class="article-author">By
        
@@ -333,79 +333,11 @@
 <p>我们有这样一张图片：  </p>
 <p><img src="http://7mnn5k.com1.z0.glb.clouddn.com/purple_button@2x.png" alt=""> .</p>
 <p>我们将一个button的背景设置为这张图片,代码如下：  </p>
-<!--More-->  
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">self</span><span class="variable">.view</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> whiteColor];</span><br><span class="line"></span><br><span class="line">_purpleButton= [[<span class="built_in">UIButton</span> alloc]initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">50</span>, <span class="number">130</span>, <span class="number">200</span>, <span class="number">100</span>)];</span><br><span class="line">[_purpleButton setTitle:<span class="string">@"Test Button"</span> forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line"><span class="built_in">UIImage</span> *buttonImage = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"purple_button@2x.png"</span>];</span><br><span class="line">[_purpleButton setBackgroundImage:buttonImage forState:<span class="built_in">UIControlStateNormal</span>];</span><br><span class="line">[<span class="keyword">self</span><span class="variable">.view</span> addSubview:_purpleButton];</span><br></pre></td></tr></table></figure>
-<p>图片的大小比button的frame小，会自动将图片进行拉伸，拉伸的效果如下： </p>
-<p><img src="http://7mnn5k.com1.z0.glb.clouddn.com/button.png" alt=""> .    </p>
-<h2 id="resizableImageWithCapInsets">resizableImageWithCapInsets</h2><p>显然这并不是我们想要的效果。  左右边框由于按钮frame过大被过度拉伸。 iOS中有一个方法提供给开发者使用。叫做<code>resizableImageWithCapInsets:</code>：以某一偏移值为偏移的可伸缩图像（保证偏移值内的图像不被拉伸或者压缩）  </p>
-<p>用法描述如下：  </p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">resizableImageWithCapInsets:  </span><br><span class="line">Creates <span class="operator">and</span> returns <span class="operator">a</span> <span class="built_in">new</span> image object <span class="operator">with</span> <span class="operator">the</span> specified cap insets.</span><br><span class="line">- (UIImage *)resizableImageWithCapInsets:(UIEdgeInsets)capInsets</span><br><span class="line">Parameters</span><br><span class="line">capInsets</span><br><span class="line">The values <span class="built_in">to</span> use <span class="keyword">for</span> <span class="operator">the</span> cap insets.</span><br><span class="line">Return Value</span><br><span class="line">A <span class="built_in">new</span> image object <span class="operator">with</span> <span class="operator">the</span> specified cap insets.</span><br><span class="line">Discussion</span><br><span class="line">You use this method <span class="built_in">to</span> <span class="built_in">add</span> cap insets <span class="built_in">to</span> <span class="operator">an</span> image <span class="operator">or</span> <span class="built_in">to</span> change <span class="operator">the</span> existing cap insets <span class="operator">of</span> <span class="operator">an</span> image. In both cases, you <span class="built_in">get</span> back <span class="operator">a</span> <span class="built_in">new</span> image <span class="operator">and</span> <span class="operator">the</span> original image remains untouched.</span><br><span class="line"></span><br><span class="line">During scaling <span class="operator">or</span> resizing <span class="operator">of</span> <span class="operator">the</span> image, areas covered <span class="keyword">by</span> <span class="operator">a</span> cap are <span class="operator">not</span> scaled <span class="operator">or</span> resized. Instead, <span class="operator">the</span> pixel area <span class="operator">not</span> covered <span class="keyword">by</span> th</span><br></pre></td></tr></table></figure>
-<p>输入参数为：  </p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Defines inset distances for views.</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;  </span><br><span class="line"><span class="built_in">CGFloat</span> top, left, bottom, right;  </span><br><span class="line">&#125; <span class="built_in">UIEdgeInsets</span>;</span><br></pre></td></tr></table></figure>
-<p><strong>分别表示上下左右四个方向的偏移量。表示拉伸图片的时候上下左右需要忽略的像素大小。</strong>  </p>
-<p>我们首先将<code>UIEdgeInsets</code>设置为UIEdgeInsetsMake(0, 0, 0, 0)，然后拉伸图片看看效果。  </p>
-<p>再viewDidLoad方法中加入下面代码：  </p>
-<pre><code>
-<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> whiteColor];
-<span class="built_in">UIButton</span> *button = [[<span class="built_in">UIButton</span> alloc]initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">50</span>, <span class="number">130</span>, <span class="number">200</span>, <span class="number">100</span>)];
-[button setTitle:<span class="string">@"Test Button"</span> forState:<span class="built_in">UIControlStateNormal</span>];
-<span class="built_in">UIEdgeInsets</span> edgeInsets = <span class="built_in">UIEdgeInsetsMake</span>(<span class="number">0</span>,<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);
-<span class="built_in">UIImage</span> *backGroundImage = [[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"purple_button@2x.png"</span> ]resizableImageWithCapInsets:edgeInsets];
-[button setBackgroundImage:backGroundImage forState:<span class="built_in">UIControlStateNormal</span>];
-
-[<span class="keyword">self</span><span class="variable">.view</span> addSubview:button];
-</code></pre><p>效果如下所示：  </p>
-<p><img src="http://7mnn5k.com1.z0.glb.clouddn.com/button2.png" alt="">  </p>
-<p>因为我们上面把上下左右需要忽略的像素值设置为0,所以整个图片都被一个一个的复制。直到达到button的frame大小。  </p>
-<h2 id="垂直拉伸图片">垂直拉伸图片</h2><p>如果我们想单纯的垂直拉伸图片，需要忽略左边和右边的边缘，如下所示： </p>
-<p><img src="http://7mnn5k.com1.z0.glb.clouddn.com/purple_button_vertically.png" alt="">  </p>
-<p>现在忽略了左边和右边的边缘，然后再拉伸的话，中间的区域就会被不断的复制。需要忽略左边和右边各8个像素。将<code>UIEdgeInsets</code> 设置为<code>UIEdgeInsetsMake(0, 8, 0, 8)</code>    </p>
-<p>代码如下：     </p>
-<pre><code>
-<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> whiteColor];
-<span class="built_in">UIButton</span> *button = [[<span class="built_in">UIButton</span> alloc]initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">50</span>, <span class="number">130</span>, <span class="number">200</span>, <span class="number">100</span>)];
-[button setTitle:<span class="string">@"Test Button"</span> forState:<span class="built_in">UIControlStateNormal</span>];
-<span class="built_in">UIEdgeInsets</span> edgeInsets = <span class="built_in">UIEdgeInsetsMake</span>(<span class="number">0</span>,<span class="number">8</span>, <span class="number">0</span>, <span class="number">8</span>);
-<span class="built_in">UIImage</span> *backGroundImage = [[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"purple_button@2x.png"</span> ]resizableImageWithCapInsets:edgeInsets];
-[button setBackgroundImage:backGroundImage forState:<span class="built_in">UIControlStateNormal</span>];
-
-[<span class="keyword">self</span><span class="variable">.view</span> addSubview:button];
-</code></pre><p>效果图如下：  </p>
-<p><img src="http://7mnn5k.com1.z0.glb.clouddn.com/puple_button_vertically.png" alt="">  </p>
-<p>这样拉伸的效果就看起来好了很多。  </p>
-<h2 id="水平拉伸图片">水平拉伸图片</h2><p>忽略上部和下部的各8个像素的边缘位置，然后中间区域的部分再拉伸的时候就会被一直复制。   </p>
-<p><img src="http://7mnn5k.com1.z0.glb.clouddn.com/purple_button_horizontal-1.png" alt="">  </p>
-<p>代码:    </p>
-<pre><code>
-<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> whiteColor];
-<span class="built_in">UIButton</span> *button = [[<span class="built_in">UIButton</span> alloc]initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">50</span>, <span class="number">130</span>, <span class="number">200</span>, <span class="number">100</span>)];
-[button setTitle:<span class="string">@"Test Button"</span> forState:<span class="built_in">UIControlStateNormal</span>];
-<span class="built_in">UIEdgeInsets</span> edgeInsets = <span class="built_in">UIEdgeInsetsMake</span>(<span class="number">8</span>,<span class="number">0</span>, <span class="number">8</span>, <span class="number">0</span>);
-<span class="built_in">UIImage</span> *backGroundImage = [[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"purple_button@2x.png"</span> ]resizableImageWithCapInsets:edgeInsets];
-[button setBackgroundImage:backGroundImage forState:<span class="built_in">UIControlStateNormal</span>];
-
-[<span class="keyword">self</span><span class="variable">.view</span> addSubview:button];
-</code></pre><p>效果图:  </p>
-<p><img src="http://7mnn5k.com1.z0.glb.clouddn.com/button_horizontal.png" alt="">  </p>
-<h2 id="最佳使用方式">最佳使用方式</h2><p>由于该图片边框四周都是不均匀的，我们需要再上下左右都忽略一定的像素大小再进行拉伸，才可以达到想要的效果，这样我们上下左右都忽略8个像素的大小进行尝试,将<code>UIEdgeInsets</code>的大小设置为<code>UIEdgeInsetsMake(8, 8, 8, 8):</code></p>
-<p><img src="http://7mnn5k.com1.z0.glb.clouddn.com/purple_button_both-1.png" alt=""> </p>
-<p>代码:   </p>
-<pre><code>
-<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> whiteColor];
-<span class="built_in">UIButton</span> *button = [[<span class="built_in">UIButton</span> alloc]initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">50</span>, <span class="number">130</span>, <span class="number">200</span>, <span class="number">100</span>)];
-[button setTitle:<span class="string">@"Test Button"</span> forState:<span class="built_in">UIControlStateNormal</span>];
-<span class="built_in">UIEdgeInsets</span> edgeInsets = <span class="built_in">UIEdgeInsetsMake</span>(<span class="number">8</span>,<span class="number">8</span>, <span class="number">8</span>, <span class="number">8</span>);
-<span class="built_in">UIImage</span> *backGroundImage = [[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"purple_button@2x.png"</span> ]resizableImageWithCapInsets:edgeInsets];
-[button setBackgroundImage:backGroundImage forState:<span class="built_in">UIControlStateNormal</span>];
-
-[<span class="keyword">self</span><span class="variable">.view</span> addSubview:button];
-</code></pre><p>效果图: </p>
-<p><img src="http://7mnn5k.com1.z0.glb.clouddn.com/button_end.png" alt="">  </p>
-<p>这才是我们想要的效果。当图片大小和要使用图片的view的frame不一致的时候，拉伸的时候就可以忽略掉边缘，然后进行拉伸。这样效果会比较好，边缘的大小值还需要自己根据图片自己设定。  </p>
-
         
         
         <p class="article-more-link">
+          
+            <a href="/2015/09/06/UIEdgeInsetsMake/#more">Read More</a>
           
        </p>
     </div>
