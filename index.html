@@ -81,6 +81,55 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2016/03/21/StringMethod/" title="iOS中String的各种方法" itemprop="url">iOS中String的各种方法</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="ChenHao" target="_blank" itemprop="author">ChenHao</a>
+		
+  <p class="article-time">
+    <time datetime="2016-03-21T01:23:09.000Z" itemprop="datePublished"> 發表於 2016-03-21</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2016/03/13/Block使用/" title="Block的使用" itemprop="url">Block的使用</a>
   </h1>
   <p class="article-author">By
@@ -100,90 +149,11 @@
 <p>闭包是一个函数（或指向函数的指针），再加上该函数执行的外部的上下文变量（有时候也称作自由变量）。  </p>
 </blockquote>
 <p><img src="http://7mnn5k.com1.z0.glb.clouddn.com/1420794587351042.png" alt="Block解释"></p>
-<!--Read More-->  
-<p>#Block中变量的复制与修改.    </p>
-<p>block之外的变量引用,block默认是将其<strong>复制到</strong>其数据结构中来实现的。入下图：<strong>（注意是定义block的时候复制的）</strong></p>
-<p><img src="http://7mnn5k.com1.z0.glb.clouddn.com/1420794551105637.jpg" alt="Block中变量的复制与修改"></p>
-<p>通过<code>block</code>进行闭包的变量是<code>const</code>的。也就是说不能在block中直接修改这些变量。  如果修改，编译器会报错。如果确实需要在block中处理变量，<strong>用__block关键字声明变量.</strong>  </p>
-<p>对于用<code>__block</code>修饰的外部变量引用，block是复制其引用地址来实现访问的，如下图：</p>
-<p><img src="http://7mnn5k.com1.z0.glb.clouddn.com/1420794526449160.jpg" alt="Block中变量的复制与修改">   </p>
-<h1 id="Block的类型">Block的类型</h1><p>block有几种不同的类型：</p>
-<ul>
-<li><strong>NSConcreteGlobalBlock：全局静态Block,不访问任何外部变量，不会涉及到任何拷贝.</strong></li>
-<li><strong>NSConcreteStackBlock：有访问到外部变量的Block,该保存在栈中，当函数返回时被销毁。</strong></li>
-<li><strong>NSConcreteMallocBlock：保存在堆中的Block,引用计数为0的时候被销毁.该类型的Block是由NSConcreteStackBlock  复制到堆中形成的。</strong>  </li>
-</ul>
-<h2 id="NSConcreteGlobalBlock类型的Block">NSConcreteGlobalBlock类型的Block</h2><p><strong>例子：</strong></p>
-<pre><code>void<span class="params">(^p)</span><span class="params">()</span> = ^<span class="params">()</span>{ 
-    printf<span class="params">(<span class="string">"Hello, World!\n"</span>)</span>; 
- } 
-</code></pre><p><code>NSConcreteGlobalBlock</code>类型的<code>Block</code>要么是空的<code>Block</code>，要么是不访问任何外部变量的<code>block</code>。<strong>它既不在栈中，也不在堆中，我理解为它可能在内存的全局区。</strong></p>
-<h2 id="NSConcreteStackBlock_类型的Block">NSConcreteStackBlock 类型的Block</h2><p><strong>例子：</strong>  </p>
-<pre><code>int a;
-void<span class="params">(^p)</span><span class="params">()</span> = ^<span class="params">()</span>{ 
-    printf<span class="params">(<span class="string">"int a = %d\n"</span>,a)</span>; 
-}      
-</code></pre><p><code>_NSConcreteStackBlock</code>类型的block有<strong>闭包行为</strong>，也就是有访问外部变量，并且该block只且只有有一次执行，因为栈中的空间是可重复使用的，所以当栈中的block执行一次之后就被清除出栈了，所以无法多次使用。  </p>
-<h2 id="NSConcreteMallocBlock类型的Block">NSConcreteMallocBlock类型的Block</h2><p><strong>例子：</strong></p>
-<pre><code><span class="function"><span class="keyword">void</span> <span class="title">exampleB_addBlockToArray</span><span class="params">(NSMutableArray *<span class="built_in">array</span>)</span> </span>{
-    <span class="keyword">char</span> b = <span class="string">'B'</span>;
-    <span class="comment">//将block 放入到数组中</span>
-    [<span class="built_in">array</span> addObject:^{
-            <span class="built_in">printf</span>(<span class="string">"%c\n"</span>, b);
-    }];
-}
-<span class="function"><span class="keyword">void</span> <span class="title">exampleB</span><span class="params">()</span> </span>{
-    NSMutableArray *<span class="built_in">array</span> = [NSMutableArray <span class="built_in">array</span>];
-    exampleB_addBlockToArray(<span class="built_in">array</span>);
-    <span class="comment">//复制行为导致block 是从栈中复制到堆中。</span>
-    <span class="keyword">void</span> (^block)() = [<span class="built_in">array</span> objectAtIndex:<span class="number">0</span>];
-    block();
-}
-</code></pre><p><code>_NSConcreteMallocBlock</code>类型的<code>block</code>有闭包行为，并且该block需要被多次执行。当需要多次执行时，就会把该block从栈中复制到堆中，供以多次执行。  </p>
-<p>#Block的数据结构定义   </p>
-<p><code>Block_layout</code>就是对<code>block</code>结构体的定义： </p>
-<p><img src="http://7mnn5k.com1.z0.glb.clouddn.com/1420794487754704.jpg" alt="Block的数据结构定义">   </p>
-<p>对应结构体如下：  </p>
-<pre><code><span class="keyword">struct</span> Block_descriptor { 
-    <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">int</span> reserved; 
-    <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">int</span> size; 
-    <span class="keyword">void</span> (*<span class="keyword">copy</span>)(<span class="keyword">void</span> *dst, <span class="keyword">void</span> *src); 
-    <span class="keyword">void</span> (*dispose)(<span class="keyword">void</span> *); 
-}; 
-
-<span class="keyword">struct</span> Block_layout { 
-    <span class="keyword">void</span> *isa; 
-    <span class="keyword">int</span> flags; 
-    <span class="keyword">int</span> reserved; 
-    <span class="keyword">void</span> (*invoke)(<span class="keyword">void</span> *, ...); 
-    <span class="keyword">struct</span> Block_descriptor *descriptor; 
-    <span class="comment">/* Imported variables. */</span> 
-}; 
-</code></pre><ul>
-<li><p><strong>isa指针：</strong>指向表明该block类型的类。所有对象都有该指针，用于实现对象相关的功能。</p>
-</li>
-<li><p><strong>flags：</strong>按bit位表示一些block的附加信息，比如判断block类型、判断block引用计数、判断block是否需要执行辅助函数等。</p>
-</li>
-<li><p><strong>reserved：</strong>保留变量，我的理解是表示block内部的变量数。</p>
-</li>
-<li><p><strong>invoke：</strong>函数指针，指向具体的block实现的函数调用地址。</p>
-</li>
-<li><p><strong>descriptor：</strong> block的附加描述信息，比如保留变量数、block的大小、进行copy或dispose的辅助函数指针。</p>
-</li>
-<li><p><strong>variables：</strong>因为block有闭包性，所以可以访问block外部的局部变量。这些variables就是复制到结构体中的外部局部变量或变量的地址。</p>
-</li>
-</ul>
-<p>#ARC下使用Block的坑总结  </p>
-<p>参考文章：  </p>
-<p><a href="http://www.cocoachina.com/ios/20150109/10891.html" target="_blank" rel="external">Objective-C中的Block</a></p>
-<p><a href="http://www.cocoachina.com/ios/20130711/6575.html" target="_blank" rel="external">深度围观block：第一集&amp;第二集</a></p>
-<p><a href="http://www.cocoachina.com/ios/20130712/6584.html" target="_blank" rel="external">深度围观block：第三集</a>  </p>
-<p><a href="http://www.cocoachina.com/ios/20130715/6599.html" target="_blank" rel="external">Block剧终：Objective-C中的闭包性和匿名函数</a></p>
-<p>  <a href="http://www.cocoachina.com/ios/20130711/6575.html" target="_blank" rel="external">6</a>: <a href="http://www.cocoachina.com/ios/20130711/65755" target="_blank" rel="external">http://www.cocoachina.com/ios/20130711/65755</a>]: <a href="http://www.cocoachina.com/ios/20150109/10891.html" target="_blank" rel="external">http://www.cocoachina.com/ios/20150109/10891.html</a></p>
-
         
         
         <p class="article-more-link">
+          
+            <a href="/2016/03/13/Block使用/#more">Read More</a>
           
        </p>
     </div>
@@ -318,59 +288,6 @@ void<span class="params">(^p)</span><span class="params">()</span> = ^<span clas
   
   <span></span> <a href="/tags/iOS总结/">iOS总结</a>
   </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/09/06/hello-world/" title="Hello World" itemprop="url">Hello World</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="ChenHao" target="_blank" itemprop="author">ChenHao</a>
-		
-  <p class="article-time">
-    <time datetime="2015-09-06T08:08:46.000Z" itemprop="datePublished"> 發表於 2015-09-06</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><!--Read  More -->
-<h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
 
 </div>
 
