@@ -4,30 +4,33 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>tableviewcellsepartoruseless | 个人博客</title>
+    <title>UITextField修改placeholder的字体和颜色 | 个人博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="ChenHao">
     
 
     
-    <meta name="description" content="解决iOS8下TableView cell的下面的线左边不能顶到头iOS7之后,在使用UITableView的时候，UITableViewCell左侧会有默认15像素的空白。即separatorLine 不能顶到最左边.如下图所示：  
-
-这里记录一下解决方案。">
+    <meta name="description" content="如何修改UITextField中placeholder的字体和颜色。
+##一、通过UITextField的attributedPlaceholder属性来实现。 
+UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(100, 100, 100, 20)];
+textField.attributedPlaceh">
 <meta property="og:type" content="article">
-<meta property="og:title" content="tableviewcellsepartoruseless">
-<meta property="og:url" content="http://yoursite.com/2016/03/26/tableviewcellsepartoruseless/index.html">
+<meta property="og:title" content="UITextField修改placeholder的字体和颜色">
+<meta property="og:url" content="http://yoursite.com/2016/03/29/UITextField修改placeholder的字体和颜色/index.html">
 <meta property="og:site_name" content="个人博客">
-<meta property="og:description" content="解决iOS8下TableView cell的下面的线左边不能顶到头iOS7之后,在使用UITableView的时候，UITableViewCell左侧会有默认15像素的空白。即separatorLine 不能顶到最左边.如下图所示：  
-
-这里记录一下解决方案。">
-<meta property="og:image" content="http://7mnn5k.com1.z0.glb.clouddn.com/1.png">
-<meta property="og:updated_time" content="2016-03-26T07:48:17.000Z">
+<meta property="og:description" content="如何修改UITextField中placeholder的字体和颜色。
+##一、通过UITextField的attributedPlaceholder属性来实现。 
+UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(100, 100, 100, 20)];
+textField.attributedPlaceh">
+<meta property="og:image" content="http://7mnn5k.com1.z0.glb.clouddn.com/Snip20151211_1.png">
+<meta property="og:updated_time" content="2016-03-29T02:19:41.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tableviewcellsepartoruseless">
-<meta name="twitter:description" content="解决iOS8下TableView cell的下面的线左边不能顶到头iOS7之后,在使用UITableView的时候，UITableViewCell左侧会有默认15像素的空白。即separatorLine 不能顶到最左边.如下图所示：  
-
-这里记录一下解决方案。">
+<meta name="twitter:title" content="UITextField修改placeholder的字体和颜色">
+<meta name="twitter:description" content="如何修改UITextField中placeholder的字体和颜色。
+##一、通过UITextField的attributedPlaceholder属性来实现。 
+UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(100, 100, 100, 20)];
+textField.attributedPlaceh">
 
     
     <link rel="alternative" href="/atom.xml" title="个人博客" type="application/atom+xml">
@@ -87,14 +90,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/03/26/tableviewcellsepartoruseless/" title="tableviewcellsepartoruseless" itemprop="url">tableviewcellsepartoruseless</a>
+      <a href="/2016/03/29/UITextField修改placeholder的字体和颜色/" title="UITextField修改placeholder的字体和颜色" itemprop="url">UITextField修改placeholder的字体和颜色</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="ChenHao" target="_blank" itemprop="author">ChenHao</a>
 		
   <p class="article-time">
-    <time datetime="2016-03-26T07:46:44.000Z" itemprop="datePublished"> 發表於 2016-03-26</time>
+    <time datetime="2016-03-29T02:12:20.000Z" itemprop="datePublished"> 發表於 2016-03-29</time>
     
   </p>
 </header>
@@ -103,38 +106,28 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#解决iOS8下TableView_cell的下面的线左边不能顶到头"><span class="toc-number">1.</span> <span class="toc-text">解决iOS8下TableView cell的下面的线左边不能顶到头</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#setSeparatorInset"><span class="toc-number">2.</span> <span class="toc-text">setSeparatorInset</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#二、KVC"><span class="toc-number">1.</span> <span class="toc-text">二、KVC</span></a></li></ol>
 		
 		</div>
 		
-		<h1 id="解决iOS8下TableView_cell的下面的线左边不能顶到头">解决iOS8下TableView cell的下面的线左边不能顶到头</h1><p>iOS7之后,在使用UITableView的时候，UITableViewCell左侧会有默认15像素的空白。即separatorLine 不能顶到最左边.如下图所示：  </p>
-<p><img src="http://7mnn5k.com1.z0.glb.clouddn.com/1.png" alt="tupian1"></p>
-<p>这里记录一下解决方案。  </p>
-<a id="more"></a>
-<h1 id="setSeparatorInset">setSeparatorInset</h1><pre><code><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>) <span class="built_in">UIEdgeInsets</span> separatorInset <span class="built_in">NS_AVAILABLE_IOS</span>(<span class="number">7</span>_0) <span class="built_in">UI_APPEARANCE_SELECTOR</span>; <span class="comment">// allows customization of the frame of cell separators  可以自定义cell separator的frame</span>
-</code></pre><p>这样在iOS7中可以通过 <code>self.tableview setSeparatorInset:UIEdgeInsetsZero</code> 来解决这个问题。  </p>
-<p>但是iOS8之后，这个解决方法不起作用了，下面是另外的解决方法：  </p>
-<pre><code><span class="tag">-</span> (void)<span class="tag">viewDidLayoutSubviews</span>
-{
-    <span class="tag">if</span> ([_tableView <span class="attribute">respondsToSelector</span>:<span class="variable">@selector</span>(<span class="attribute">setSeparatorInset</span>:)]) {
-        <span class="attr_selector">[_tableView setSeparatorInset:UIEdgeInsetsZero]</span>;
-    }
-
-}
-
-<span class="tag">-</span> (void)<span class="tag">tableView</span>:(UITableView *)<span class="tag">tableView</span> <span class="tag">willDisplayCell</span>:(nonnull UITableViewCell *)<span class="tag">cell</span> <span class="tag">forRowAtIndexPath</span>:(nonnull NSIndexPath *)<span class="tag">indexPath</span>
-{
-    <span class="tag">if</span> ([tableView <span class="attribute">respondsToSelector</span>:<span class="variable">@selector</span>(<span class="attribute">setSeparatorInset</span>:)]) {
-        <span class="attr_selector">[tableView setSeparatorInset:UIEdgeInsetsZero]</span>;
-    }
-
-    <span class="tag">if</span> ([tableView <span class="attribute">respondsToSelector</span>:<span class="variable">@selector</span>(<span class="attribute">setLayoutMargins</span>:)]) {
-        <span class="attr_selector">[tableView setLayoutMargins:UIEdgeInsetsZero]</span>;
-    }
-    <span class="tag">if</span> ([cell <span class="attribute">respondsToSelector</span>:<span class="variable">@selector</span>(<span class="attribute">setLayoutMargins</span>:)]) {
-        <span class="attr_selector">[cell setLayoutMargins:UIEdgeInsetsZero]</span>;
-    }
-}
+		<p>如何修改UITextField中placeholder的字体和颜色。</p>
+<p>##一、通过UITextField的attributedPlaceholder属性来实现。 </p>
+<pre><code><span class="built_in">UITextField</span> *textField = [[<span class="built_in">UITextField</span> alloc] initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">100</span>, <span class="number">100</span>, <span class="number">100</span>, <span class="number">20</span>)];
+textField<span class="variable">.attributedPlaceholder</span> = [[<span class="built_in">NSAttributedString</span> alloc] initWithString:<span class="string">@"i am placeholder."</span>
+                                                              attributes:@{<span class="built_in">NSForegroundColorAttributeName</span> : [<span class="built_in">UIColor</span> redColor],
+                                                               <span class="built_in">NSFontAttributeName</span> : [<span class="built_in">UIFont</span> systemFontOfSize:<span class="number">6</span>]
+}];
+[<span class="keyword">self</span><span class="variable">.view</span> addSubview:textField];
+</code></pre><a id="more"></a>
+<h2 id="二、KVC">二、KVC</h2><p>UITextField的placeholder其实就是个UILabel，我们拿到它的真实属性名，就可以通过KVC赋值了。  </p>
+<p><img src="http://7mnn5k.com1.z0.glb.clouddn.com/Snip20151211_1.png" alt="UITextField类结构">  </p>
+<pre><code>UITextField *textField = [[UITextField alloc] <span class="string">initWithFrame:</span>CGRectMake(<span class="number">100</span>, <span class="number">100</span>, <span class="number">100</span>, <span class="number">20</span>)];
+           textField.placeholder = @<span class="string">"i am placeholder."</span>;
+           [textField <span class="string">setValue:</span>[UIFont <span class="string">systemFontOfSize:</span><span class="number">15</span>] <span class="string">forKeyPath:</span>@<span class="string">"_placeholderLabel.font"</span>];
+           [textField <span class="string">setValue:</span>[UIColor redColor] <span class="string">forKeyPath:</span>@<span class="string">"_placeholderLabel.textColor"</span>];
+           <span class="comment">// 如果你愿意的话，placehloder本身也可以通过KVC赋值</span>
+           [textField <span class="string">setValue:</span>@<span class="string">"abc"</span> <span class="string">forKeyPath:</span>@<span class="string">"_placeholderLabel.text"</span>];
+           [self.view <span class="string">addSubview:</span>textField];
 </code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
@@ -143,7 +136,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/iOS学习记录/">iOS学习记录</a>
+  <span></span> <a href="/tags/iOS总结/">iOS总结</a>
   </div>
 
 </div>
@@ -152,7 +145,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/03/26/tableviewcellsepartoruseless/" data-title="tableviewcellsepartoruseless | 个人博客" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/03/29/UITextField修改placeholder的字体和颜色/" data-title="UITextField修改placeholder的字体和颜色 | 个人博客" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -165,19 +158,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/03/29/UITextField修改placeholder的字体和颜色/" title="UITextField修改placeholder的字体和颜色">
-  <strong>上一篇：</strong><br/>
-  <span>
-  UITextField修改placeholder的字体和颜色</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/03/21/StringMethod/"  title="iOS中String的各种方法">
+<a href="/2016/03/26/tableviewcellsepartoruseless/"  title="tableviewcellsepartoruseless">
  <strong>下一篇：</strong><br/> 
- <span>iOS中String的各种方法
+ <span>tableviewcellsepartoruseless
 </span>
 </a>
 </div>
@@ -192,7 +177,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#解决iOS8下TableView_cell的下面的线左边不能顶到头"><span class="toc-number">1.</span> <span class="toc-text">解决iOS8下TableView cell的下面的线左边不能顶到头</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#setSeparatorInset"><span class="toc-number">2.</span> <span class="toc-text">setSeparatorInset</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#二、KVC"><span class="toc-number">1.</span> <span class="toc-text">二、KVC</span></a></li></ol>
  
   </div>
 
