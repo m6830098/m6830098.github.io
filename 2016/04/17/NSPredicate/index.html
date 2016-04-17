@@ -11,22 +11,25 @@
     
 
     
-    <meta name="description" content="title: NSPredicate的使用date: 2016-04-17 22:07:43
-tags: iOS开发学习NSPredicate（谓词）,是一个Foundation类,可以使用它指定数据被获取或者过滤的方式。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，来定义一个集合被搜寻的逻辑条件。  
-在集合中使用NSPredicateFoundation中提供了使用NSPredic">
+    <meta name="description" content="title: NSPredicate的使用date: 2016-04-17 22:07:43tags: iOS开发学习  
+
+NSPredicate（谓词）,是一个Foundation类,可以使用它指定数据被获取或者过滤的方式。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，来定义一个集合被搜寻的逻辑条件。  
+在集合中使用NSPredicateFoundation中提供了使用NSPre">
 <meta property="og:type" content="article">
 <meta property="og:title" content="个人博客">
 <meta property="og:url" content="http://yoursite.com/2016/04/17/NSPredicate/index.html">
 <meta property="og:site_name" content="个人博客">
-<meta property="og:description" content="title: NSPredicate的使用date: 2016-04-17 22:07:43
-tags: iOS开发学习NSPredicate（谓词）,是一个Foundation类,可以使用它指定数据被获取或者过滤的方式。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，来定义一个集合被搜寻的逻辑条件。  
-在集合中使用NSPredicateFoundation中提供了使用NSPredic">
-<meta property="og:updated_time" content="2016-04-17T14:09:19.000Z">
+<meta property="og:description" content="title: NSPredicate的使用date: 2016-04-17 22:07:43tags: iOS开发学习  
+
+NSPredicate（谓词）,是一个Foundation类,可以使用它指定数据被获取或者过滤的方式。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，来定义一个集合被搜寻的逻辑条件。  
+在集合中使用NSPredicateFoundation中提供了使用NSPre">
+<meta property="og:updated_time" content="2016-04-17T14:11:30.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="个人博客">
-<meta name="twitter:description" content="title: NSPredicate的使用date: 2016-04-17 22:07:43
-tags: iOS开发学习NSPredicate（谓词）,是一个Foundation类,可以使用它指定数据被获取或者过滤的方式。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，来定义一个集合被搜寻的逻辑条件。  
-在集合中使用NSPredicateFoundation中提供了使用NSPredic">
+<meta name="twitter:description" content="title: NSPredicate的使用date: 2016-04-17 22:07:43tags: iOS开发学习  
+
+NSPredicate（谓词）,是一个Foundation类,可以使用它指定数据被获取或者过滤的方式。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，来定义一个集合被搜寻的逻辑条件。  
+在集合中使用NSPredicateFoundation中提供了使用NSPre">
 
     
     <link rel="alternative" href="/atom.xml" title="个人博客" type="application/atom+xml">
@@ -93,7 +96,7 @@ tags: iOS开发学习NSPredicate（谓词）,是一个Foundation类,可以使用
 		<a href="/about" title="ChenHao" target="_blank" itemprop="author">ChenHao</a>
 		
   <p class="article-time">
-    <time datetime="2016-04-17T14:09:19.000Z" itemprop="datePublished"> 發表於 2016-04-17</time>
+    <time datetime="2016-04-17T14:11:30.000Z" itemprop="datePublished"> 發表於 2016-04-17</time>
     
   </p>
 </header>
@@ -102,12 +105,13 @@ tags: iOS开发学习NSPredicate（谓词）,是一个Foundation类,可以使用
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tags:_iOS开发学习"><span class="toc-number">1.</span> <span class="toc-text">tags: iOS开发学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在集合中使用NSPredicate"><span class="toc-number">2.</span> <span class="toc-text">在集合中使用NSPredicate</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用筛选方法："><span class="toc-number">2.1.</span> <span class="toc-text">常用筛选方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#利用成员实例的方法_，类似上面的方法。"><span class="toc-number">2.1.1.</span> <span class="toc-text">利用成员实例的方法 ，类似上面的方法。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BEGINSWITH(以某个字符串开头，begins_with)_&&_ENDSWITH(ends_with_以某个字符串结尾)"><span class="toc-number">2.1.2.</span> <span class="toc-text">BEGINSWITH(以某个字符串开头，begins with) && ENDSWITH(ends with 以某个字符串结尾)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通配符LIKE_*代表一个或者多个或者是空字符,_?代表一个字符_。"><span class="toc-number">2.1.3.</span> <span class="toc-text">通配符LIKE   *代表一个或者多个或者是空字符, ?代表一个字符 。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关系运算_IN_,BETWEEN_,AND_,OR,NOT_IN"><span class="toc-number">2.1.4.</span> <span class="toc-text">关系运算 IN ,BETWEEN ,AND ,OR,NOT IN</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSCompoundPredicate"><span class="toc-number">2.2.</span> <span class="toc-text">NSCompoundPredicate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匹配用法"><span class="toc-number">2.3.</span> <span class="toc-text">匹配用法</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#在集合中使用NSPredicate"><span class="toc-number">1.</span> <span class="toc-text">在集合中使用NSPredicate</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用筛选方法："><span class="toc-number">1.1.</span> <span class="toc-text">常用筛选方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#利用成员实例的方法_，类似上面的方法。"><span class="toc-number">1.1.1.</span> <span class="toc-text">利用成员实例的方法 ，类似上面的方法。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BEGINSWITH(以某个字符串开头，begins_with)_&&_ENDSWITH(ends_with_以某个字符串结尾)"><span class="toc-number">1.1.2.</span> <span class="toc-text">BEGINSWITH(以某个字符串开头，begins with) && ENDSWITH(ends with 以某个字符串结尾)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通配符LIKE_*代表一个或者多个或者是空字符,_?代表一个字符_。"><span class="toc-number">1.1.3.</span> <span class="toc-text">通配符LIKE   *代表一个或者多个或者是空字符, ?代表一个字符 。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关系运算_IN_,BETWEEN_,AND_,OR,NOT_IN"><span class="toc-number">1.1.4.</span> <span class="toc-text">关系运算 IN ,BETWEEN ,AND ,OR,NOT IN</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSCompoundPredicate"><span class="toc-number">1.2.</span> <span class="toc-text">NSCompoundPredicate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匹配用法"><span class="toc-number">1.3.</span> <span class="toc-text">匹配用法</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<p>title: NSPredicate的使用<br>date: 2016-04-17 22:07:43</p>
-<h2 id="tags:_iOS开发学习">tags: iOS开发学习</h2><p>NSPredicate（谓词）,是一个Foundation类,<strong>可以使用它指定数据被获取或者过滤的方式</strong>。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，<strong>来定义一个集合被搜寻的逻辑条件。</strong>  </p>
+		<p>title: NSPredicate的使用<br>date: 2016-04-17 22:07:43<br>tags: iOS开发学习  </p>
+<hr>
+<p>NSPredicate（谓词）,是一个Foundation类,<strong>可以使用它指定数据被获取或者过滤的方式</strong>。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，<strong>来定义一个集合被搜寻的逻辑条件。</strong>  </p>
 <h2 id="在集合中使用NSPredicate">在集合中使用NSPredicate</h2><p>Foundation中提供了使用<code>NSPredicate</code>来过滤<code>NSArray／NSMutableArray&amp;NSSet／NSMutableSet</code>的方法。</p>
 <p>不可变的集合，<code>NSArray&amp;NSSet</code>，有可以通过评估接收到的predicate来返回一个不可变集合的方法<code>filteredArrayUsingPredicate:</code>和<code>filteredSetUsingPredicate:。</code>  可变集合，<code>NSMutableArray&amp;NSMutableSet</code>，可以使用方法<code>filterUsingPredicate:</code><strong>，它可以通过运行接收到的谓词来移除评估结果为FALSE的对象。</strong></p>
 <pre><code><span class="built_in">NSArray</span> *array = @[<span class="string">@"jim"</span>,<span class="string">@"cook"</span>,<span class="string">@"jobs"</span>,<span class="string">@"sdevm"</span>];
@@ -338,7 +342,7 @@ BOOL match = [pres evaluateWithObject:<span class="built_in">test</span>1];
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tags:_iOS开发学习"><span class="toc-number">1.</span> <span class="toc-text">tags: iOS开发学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在集合中使用NSPredicate"><span class="toc-number">2.</span> <span class="toc-text">在集合中使用NSPredicate</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用筛选方法："><span class="toc-number">2.1.</span> <span class="toc-text">常用筛选方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#利用成员实例的方法_，类似上面的方法。"><span class="toc-number">2.1.1.</span> <span class="toc-text">利用成员实例的方法 ，类似上面的方法。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BEGINSWITH(以某个字符串开头，begins_with)_&&_ENDSWITH(ends_with_以某个字符串结尾)"><span class="toc-number">2.1.2.</span> <span class="toc-text">BEGINSWITH(以某个字符串开头，begins with) && ENDSWITH(ends with 以某个字符串结尾)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通配符LIKE_*代表一个或者多个或者是空字符,_?代表一个字符_。"><span class="toc-number">2.1.3.</span> <span class="toc-text">通配符LIKE   *代表一个或者多个或者是空字符, ?代表一个字符 。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关系运算_IN_,BETWEEN_,AND_,OR,NOT_IN"><span class="toc-number">2.1.4.</span> <span class="toc-text">关系运算 IN ,BETWEEN ,AND ,OR,NOT IN</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSCompoundPredicate"><span class="toc-number">2.2.</span> <span class="toc-text">NSCompoundPredicate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匹配用法"><span class="toc-number">2.3.</span> <span class="toc-text">匹配用法</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#在集合中使用NSPredicate"><span class="toc-number">1.</span> <span class="toc-text">在集合中使用NSPredicate</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用筛选方法："><span class="toc-number">1.1.</span> <span class="toc-text">常用筛选方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#利用成员实例的方法_，类似上面的方法。"><span class="toc-number">1.1.1.</span> <span class="toc-text">利用成员实例的方法 ，类似上面的方法。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BEGINSWITH(以某个字符串开头，begins_with)_&&_ENDSWITH(ends_with_以某个字符串结尾)"><span class="toc-number">1.1.2.</span> <span class="toc-text">BEGINSWITH(以某个字符串开头，begins with) && ENDSWITH(ends with 以某个字符串结尾)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通配符LIKE_*代表一个或者多个或者是空字符,_?代表一个字符_。"><span class="toc-number">1.1.3.</span> <span class="toc-text">通配符LIKE   *代表一个或者多个或者是空字符, ?代表一个字符 。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关系运算_IN_,BETWEEN_,AND_,OR,NOT_IN"><span class="toc-number">1.1.4.</span> <span class="toc-text">关系运算 IN ,BETWEEN ,AND ,OR,NOT IN</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSCompoundPredicate"><span class="toc-number">1.2.</span> <span class="toc-text">NSCompoundPredicate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匹配用法"><span class="toc-number">1.3.</span> <span class="toc-text">匹配用法</span></a></li></ol></li></ol>
  
   </div>
 

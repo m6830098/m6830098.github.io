@@ -88,14 +88,15 @@
 		<a href="/about" title="ChenHao" target="_blank" itemprop="author">ChenHao</a>
 		
   <p class="article-time">
-    <time datetime="2016-04-17T14:09:19.000Z" itemprop="datePublished"> 發表於 2016-04-17</time>
+    <time datetime="2016-04-17T14:11:30.000Z" itemprop="datePublished"> 發表於 2016-04-17</time>
     
   </p>
 </header>
     <div class="article-content">
         
-        <p>title: NSPredicate的使用<br>date: 2016-04-17 22:07:43</p>
-<h2 id="tags:_iOS开发学习">tags: iOS开发学习</h2><p>NSPredicate（谓词）,是一个Foundation类,<strong>可以使用它指定数据被获取或者过滤的方式</strong>。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，<strong>来定义一个集合被搜寻的逻辑条件。</strong>  </p>
+        <p>title: NSPredicate的使用<br>date: 2016-04-17 22:07:43<br>tags: iOS开发学习  </p>
+<hr>
+<p>NSPredicate（谓词）,是一个Foundation类,<strong>可以使用它指定数据被获取或者过滤的方式</strong>。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，<strong>来定义一个集合被搜寻的逻辑条件。</strong>  </p>
 <h2 id="在集合中使用NSPredicate">在集合中使用NSPredicate</h2><p>Foundation中提供了使用<code>NSPredicate</code>来过滤<code>NSArray／NSMutableArray&amp;NSSet／NSMutableSet</code>的方法。</p>
 <p>不可变的集合，<code>NSArray&amp;NSSet</code>，有可以通过评估接收到的predicate来返回一个不可变集合的方法<code>filteredArrayUsingPredicate:</code>和<code>filteredSetUsingPredicate:。</code>  可变集合，<code>NSMutableArray&amp;NSMutableSet</code>，可以使用方法<code>filterUsingPredicate:</code><strong>，它可以通过运行接收到的谓词来移除评估结果为FALSE的对象。</strong></p>
 <pre><code><span class="built_in">NSArray</span> *array = @[<span class="string">@"jim"</span>,<span class="string">@"cook"</span>,<span class="string">@"jobs"</span>,<span class="string">@"sdevm"</span>];
