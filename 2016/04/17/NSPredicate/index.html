@@ -1,0 +1,630 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-hk">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>个人博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="ChenHao">
+    
+
+    
+    <meta name="description" content="title: NSPredicate的使用date: 2016-04-17 22:07:43
+tags: iOS开发学习NSPredicate（谓词）,是一个Foundation类,可以使用它指定数据被获取或者过滤的方式。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，来定义一个集合被搜寻的逻辑条件。  
+在集合中使用NSPredicateFoundation中提供了使用NSPredic">
+<meta property="og:type" content="article">
+<meta property="og:title" content="个人博客">
+<meta property="og:url" content="http://yoursite.com/2016/04/17/NSPredicate/index.html">
+<meta property="og:site_name" content="个人博客">
+<meta property="og:description" content="title: NSPredicate的使用date: 2016-04-17 22:07:43
+tags: iOS开发学习NSPredicate（谓词）,是一个Foundation类,可以使用它指定数据被获取或者过滤的方式。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，来定义一个集合被搜寻的逻辑条件。  
+在集合中使用NSPredicateFoundation中提供了使用NSPredic">
+<meta property="og:updated_time" content="2016-04-17T14:09:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="个人博客">
+<meta name="twitter:description" content="title: NSPredicate的使用date: 2016-04-17 22:07:43
+tags: iOS开发学习NSPredicate（谓词）,是一个Foundation类,可以使用它指定数据被获取或者过滤的方式。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，来定义一个集合被搜寻的逻辑条件。  
+在集合中使用NSPredicateFoundation中提供了使用NSPredic">
+
+    
+    <link rel="alternative" href="/atom.xml" title="个人博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="个人博客" title="个人博客"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="个人博客">个人博客</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/04/17/NSPredicate/" title="" itemprop="url"></a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="ChenHao" target="_blank" itemprop="author">ChenHao</a>
+		
+  <p class="article-time">
+    <time datetime="2016-04-17T14:09:19.000Z" itemprop="datePublished"> 發表於 2016-04-17</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目錄</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tags:_iOS开发学习"><span class="toc-number">1.</span> <span class="toc-text">tags: iOS开发学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在集合中使用NSPredicate"><span class="toc-number">2.</span> <span class="toc-text">在集合中使用NSPredicate</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用筛选方法："><span class="toc-number">2.1.</span> <span class="toc-text">常用筛选方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#利用成员实例的方法_，类似上面的方法。"><span class="toc-number">2.1.1.</span> <span class="toc-text">利用成员实例的方法 ，类似上面的方法。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BEGINSWITH(以某个字符串开头，begins_with)_&&_ENDSWITH(ends_with_以某个字符串结尾)"><span class="toc-number">2.1.2.</span> <span class="toc-text">BEGINSWITH(以某个字符串开头，begins with) && ENDSWITH(ends with 以某个字符串结尾)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通配符LIKE_*代表一个或者多个或者是空字符,_?代表一个字符_。"><span class="toc-number">2.1.3.</span> <span class="toc-text">通配符LIKE   *代表一个或者多个或者是空字符, ?代表一个字符 。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关系运算_IN_,BETWEEN_,AND_,OR,NOT_IN"><span class="toc-number">2.1.4.</span> <span class="toc-text">关系运算 IN ,BETWEEN ,AND ,OR,NOT IN</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSCompoundPredicate"><span class="toc-number">2.2.</span> <span class="toc-text">NSCompoundPredicate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匹配用法"><span class="toc-number">2.3.</span> <span class="toc-text">匹配用法</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<p>title: NSPredicate的使用<br>date: 2016-04-17 22:07:43</p>
+<h2 id="tags:_iOS开发学习">tags: iOS开发学习</h2><p>NSPredicate（谓词）,是一个Foundation类,<strong>可以使用它指定数据被获取或者过滤的方式</strong>。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，<strong>来定义一个集合被搜寻的逻辑条件。</strong>  </p>
+<h2 id="在集合中使用NSPredicate">在集合中使用NSPredicate</h2><p>Foundation中提供了使用<code>NSPredicate</code>来过滤<code>NSArray／NSMutableArray&amp;NSSet／NSMutableSet</code>的方法。</p>
+<p>不可变的集合，<code>NSArray&amp;NSSet</code>，有可以通过评估接收到的predicate来返回一个不可变集合的方法<code>filteredArrayUsingPredicate:</code>和<code>filteredSetUsingPredicate:。</code>  可变集合，<code>NSMutableArray&amp;NSMutableSet</code>，可以使用方法<code>filterUsingPredicate:</code><strong>，它可以通过运行接收到的谓词来移除评估结果为FALSE的对象。</strong></p>
+<pre><code><span class="built_in">NSArray</span> *array = @[<span class="string">@"jim"</span>,<span class="string">@"cook"</span>,<span class="string">@"jobs"</span>,<span class="string">@"sdevm"</span>];
+    <span class="built_in">NSPredicate</span> *preLength = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"length &gt; 3"</span>];
+    <span class="built_in">NSLog</span>(<span class="string">@"array = %@"</span>,array);
+    <span class="built_in">NSLog</span>(<span class="string">@"array precidate=%@"</span>,[array filteredArrayUsingPredicate:preLength]);
+
+    <span class="built_in">NSMutableArray</span> *muArray = [<span class="built_in">NSMutableArray</span> arrayWithObjects:<span class="string">@"jim"</span>,<span class="string">@"cook"</span>,<span class="string">@"jobs"</span>,<span class="string">@"sdevm"</span>, <span class="literal">nil</span>];
+    [muArray filterUsingPredicate:preLength];
+    <span class="built_in">NSLog</span>(<span class="string">@"muArray=%@"</span>,muArray);  
+</code></pre><a id="more"></a> 
+<h3 id="常用筛选方法：">常用筛选方法：</h3><h4 id="利用成员实例的方法_，类似上面的方法。">利用成员实例的方法 ，类似上面的方法。</h4><pre><code><span class="built_in">NSArray</span> *array2 = @[<span class="string">@"2"</span>,<span class="string">@"3"</span>,<span class="string">@"4"</span>,<span class="string">@"5"</span>];
+    <span class="built_in">NSPredicate</span> *preIntergeris3 = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"integerValue &gt;= 3"</span>];
+    <span class="built_in">NSPredicate</span> *preIntergeris3_2 = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"integerValue &gt;= %@"</span>,@<span class="number">3</span>];
+    <span class="built_in">NSLog</span>(<span class="string">@"array2 with preIntergeris3 = %@"</span>,[array2 filteredArrayUsingPredicate:preIntergeris3]);  
+</code></pre><p>扩展到对象类：  </p>
+<pre><code><span class="class"><span class="keyword">@interface</span> <span class="title">Person</span> : <span class="title">NSObject</span></span>
+<span class="keyword">@property</span> <span class="built_in">NSString</span> *firstName;
+<span class="keyword">@property</span> <span class="built_in">NSString</span> *lastName;
+<span class="keyword">@property</span> <span class="built_in">NSNumber</span> *age;
+<span class="keyword">@end</span>
+<span class="class"><span class="keyword">@implementation</span> <span class="title">Person</span></span>
+- (<span class="built_in">NSString</span> *)description {
+    <span class="keyword">return</span> [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"%@ %@"</span>, <span class="keyword">self</span><span class="variable">.firstName</span>, <span class="keyword">self</span><span class="variable">.lastName</span>];
+}
+<span class="keyword">@end</span>
+
+
+<span class="built_in">NSArray</span> *firstNames = @[ <span class="string">@"Alice"</span>, <span class="string">@"Bob"</span>, <span class="string">@"Charlie"</span>, <span class="string">@"Quentin"</span> ];
+<span class="built_in">NSArray</span> *lastNames = @[ <span class="string">@"Smith"</span>, <span class="string">@"Jones"</span>, <span class="string">@"Smith"</span>, <span class="string">@"Alberts"</span> ];
+<span class="built_in">NSArray</span> *ages = @[ @<span class="number">24</span>, @<span class="number">27</span>, @<span class="number">33</span>, @<span class="number">31</span> ];
+<span class="built_in">NSMutableArray</span> *people = [<span class="built_in">NSMutableArray</span> array];
+[firstNames enumerateObjectsUsingBlock:^(<span class="keyword">id</span>  _Nonnull obj, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> * _Nonnull stop) {
+
+    Person *person = [[Person alloc]init];
+    person<span class="variable">.firstName</span> = [firstNames objectAtIndex:idx];
+    person<span class="variable">.lastName</span> = [lastNames objectAtIndex:idx];
+    person<span class="variable">.age</span>= [ages objectAtIndex:idx];
+    [people addObject:person];
+}];
+
+<span class="built_in">NSPredicate</span> *precidate1 = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"firstName = 'Bob'"</span>];
+<span class="built_in">NSPredicate</span> *precidate2 = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"lastName = %@"</span>, <span class="string">@"Smith"</span>];
+<span class="built_in">NSPredicate</span> *precidate3 = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"age &gt;= 30"</span>];
+
+<span class="comment">// ["Bob Jones"]</span>
+<span class="built_in">NSLog</span>(<span class="string">@"Bobs: %@"</span>, [people filteredArrayUsingPredicate:precidate1]);
+
+<span class="comment">// ["Alice Smith", "Charlie Smith"]</span>
+<span class="built_in">NSLog</span>(<span class="string">@"Smiths: %@"</span>, [people filteredArrayUsingPredicate:precidate2]);
+
+<span class="comment">// ["Charlie Smith", "Quentin Alberts"]</span>
+<span class="built_in">NSLog</span>(<span class="string">@"30's: %@"</span>, [people filteredArrayUsingPredicate:precidate3]);  
+</code></pre><p>三个Predicate的含义是：  </p>
+<p><strong>对数组中的成员对象Person对象，使用[Person firstName] (firstName的get方法），返回=Bob的对象 。<br>对数组中的成员对象Person对象，使用[Person lastName] (firstName的get方法），返回=Smith的对象 。<br>对数组中的成员对象Person对象，使用[Person age] (firstName的get方法），返回&gt;=30的对象 。</strong> </p>
+<p>这里针对<code>NSString</code>的操作，使用的是<code>=</code>号，这里好像和<code>==</code>效果是一样的。  来判断字符串是否相同。那么如何判断字符串包含另外一个字符串呢？可以在NSPredicate中使用<code>CONTAINS（大小写都可以）</code>来表示包含关系。</p>
+<blockquote>
+<p>当判断的时候需要忽略大小写可以使用<code>[cd] &gt;[c]</code>，忽略重音符使用<code>[cd] &gt;[d]</code>，即不区分大小写，写不区分发音符号则使用<code>[cd]</code></p>
+</blockquote>
+<pre><code><span class="built_in">NSPredicate</span> *precidateContainsali = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"firstName contains[cd] %@"</span>,<span class="string">@"ali"</span>];
+  <span class="comment">// ["Alice Smith"]</span>
+  <span class="built_in">NSLog</span>(<span class="string">@"contains ali = %@"</span>,[people filteredArrayUsingPredicate:precidateContainsali]);
+</code></pre><p><strong>涉及到更复杂的查询语句,比如说判断字符串以某个字符串开头，或者结尾，通配符的使用。</strong> </p>
+<h4 id="BEGINSWITH(以某个字符串开头，begins_with)_&amp;&amp;_ENDSWITH(ends_with_以某个字符串结尾)">BEGINSWITH(以某个字符串开头，begins with) &amp;&amp; ENDSWITH(ends with 以某个字符串结尾)</h4><pre><code><span class="built_in">NSPredicate</span> *precidateBeginsWith = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"firstName beginswith[cd] %@"</span>,<span class="string">@"a"</span>];
+
+   <span class="built_in">NSLog</span>(<span class="string">@"Beginswith ali = %@"</span>,[people filteredArrayUsingPredicate:precidateBeginsWith]);
+
+   <span class="built_in">NSPredicate</span> *precidateEndWith = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"firstName endswith[cd] %@"</span>,<span class="string">@"e"</span>];
+
+   <span class="built_in">NSLog</span>(<span class="string">@"EndWith ali = %@"</span>,[people filteredArrayUsingPredicate:precidateEndWith]);
+</code></pre><h4 id="通配符LIKE_*代表一个或者多个或者是空字符,_?代表一个字符_。">通配符LIKE   <code>*</code>代表一个或者多个或者是空字符, <code>?</code>代表一个字符 。</h4><pre><code><span class="built_in">NSPredicate</span> *predicateLike = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"firstName Like[cd] %@"</span>,<span class="string">@"??I*"</span>];
+   <span class="comment">//["Alice Smith"]</span>
+   <span class="built_in">NSLog</span>(<span class="string">@"Like ??i = %@"</span>,[people filteredArrayUsingPredicate:predicateLike]);
+</code></pre><h4 id="关系运算_IN_,BETWEEN_,AND_,OR,NOT_IN">关系运算 IN ,BETWEEN ,AND ,OR,NOT IN</h4><ol>
+<li><strong>IN判断是否在</strong>之中**</li>
+<li><strong>OR（或，可以用||代替)，OR可以判断不同的属性，</strong></li>
+<li><strong>BETWEEN（之间），通常用来判断NSNumber对象。</strong></li>
+<li><strong>AND（且），可以使用&amp;&amp;代替</strong>  </li>
+<li><strong>NOT（非，可以用！代替）</strong>  </li>
+</ol>
+<pre><code><span class="name">NSPredicate</span> *<span class="atom">inPredicate</span> = [<span class="name">NSPredicate</span> <span class="atom">predicateWithFormat</span>:@<span class="string">"firstName in %@"</span>,@[@<span class="string">"Alice"</span>,@<span class="string">"Sgslg"</span>]];
+   //[<span class="string">"Alice Smith"</span>]
+   <span class="name">NSLog</span>(@<span class="string">"inpredicate = %@"</span>,[<span class="atom">people</span> <span class="atom">filteredArrayUsingPredicate</span>:<span class="atom">inPredicate</span>]);
+
+   <span class="name">NSPredicate</span> *<span class="atom">orPredicate</span> = [<span class="name">NSPredicate</span> <span class="atom">predicateWithFormat</span>:@<span class="string">"firstName == %@ OR firstName == %@"</span>,@<span class="string">"Alice"</span>,@<span class="string">"Aharlie"</span>];
+   //[<span class="string">"Alice Smith"</span>],[<span class="string">"Aharlie Smith"</span>]
+   <span class="name">NSLog</span>(@<span class="string">"inpredicate = %@"</span>,[<span class="atom">people</span> <span class="atom">filteredArrayUsingPredicate</span>:<span class="atom">orPredicate</span>]);
+
+   <span class="name">NSPredicate</span> *<span class="atom">orPredicate2</span> = [<span class="name">NSPredicate</span> <span class="atom">predicateWithFormat</span>:@<span class="string">"firstName == %@ OR lastName == %@"</span>,@<span class="string">"Alice"</span>,@<span class="string">"Jones"</span>];
+   //[<span class="string">"Alice Smith"</span>],[<span class="string">"Bob Jones"</span>]
+   <span class="name">NSLog</span>(@<span class="string">"inpredicate = %@"</span>,[<span class="atom">people</span> <span class="atom">filteredArrayUsingPredicate</span>:<span class="atom">orPredicate2</span>]);
+</code></pre><p>NOT最常用的用法是从一个数组中剔除另外一个数组的数据，这个可以使用一个双层循环，但是非常麻烦。但是用NSPredicate 加NOT运算符就非常简单了。 如代码：  </p>
+<pre><code><span class="name">NSArray</span> *<span class="atom">arrayFilter</span> = @[@<span class="string">"abc1"</span>, @<span class="string">"abc2"</span>];
+    <span class="name">NSArray</span> *<span class="atom">arrayContent</span> = @[@<span class="string">"a1"</span>, @<span class="string">"abc1"</span>, @<span class="string">"abc4"</span>, @<span class="string">"abc2"</span>];
+    <span class="name">NSPredicate</span> *<span class="atom">predicate</span> = [<span class="name">NSPredicate</span> <span class="atom">predicateWithFormat</span>:@<span class="string">" self in %@"</span>,<span class="atom">arrayFilter</span>];
+    <span class="name">NSPredicate</span> *<span class="atom">predicate2</span> = [<span class="name">NSPredicate</span> <span class="atom">predicateWithFormat</span>:@<span class="string">"NOT(self in %@)"</span>,<span class="atom">arrayFilter</span>];
+    //[<span class="string">" abc1"</span>],[<span class="string">"abc2"</span>]
+    <span class="name">NSLog</span>(@<span class="string">"predicate1= %@"</span>,[<span class="atom">arrayContent</span> <span class="atom">filteredArrayUsingPredicate</span>:<span class="atom">predicate</span>]);
+    //[<span class="string">" a1"</span>],[<span class="string">"abc4"</span>]
+    <span class="name">NSLog</span>(@<span class="string">"predicate2= %@"</span>,[<span class="atom">arrayContent</span> <span class="atom">filteredArrayUsingPredicate</span>:<span class="atom">predicate2</span>]);
+</code></pre><p>##(NSPredicate<em>)predicateWithBlock:(BOOL (^)(id evaluatedObject, NSDictionary </em>bindings))block  </p>
+<p>事实上，因为block可以<strong>封装任意的计算</strong>，所以有一个查询类是无法以NSPredicate格式字符串形式来表达的（比如对运行时被动态计算的值的评估）。而且当同一件事情可以用NSExpression结合自定义选择器来完成时，block为完成工作提供了一个方便的接口。</p>
+<pre><code><span class="built_in">NSPredicate</span> *blockPredicate = [<span class="built_in">NSPredicate</span> predicateWithBlock:^<span class="built_in">BOOL</span>(<span class="keyword">id</span>  _Nonnull evaluatedObject, <span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *,<span class="keyword">id</span>&gt; * _Nullable bindings) {
+       <span class="keyword">return</span> [[evaluatedObject lastName] length] &lt;= <span class="number">5</span>;
+
+   }];
+   <span class="built_in">NSLog</span>(<span class="string">@"Short Names = %@"</span>,[people filteredArrayUsingPredicate:blockPredicate]);
+</code></pre><blockquote>
+<p>重要提示：由predicateWithBlock:生成的NSPredicate不能用于由SQLite存储库支持的Core Data数据的提取要求。</p>
+</blockquote>
+<h3 id="NSCompoundPredicate">NSCompoundPredicate</h3><p><strong>我们见过与&amp;或被用在谓词格式字符串中以创建复合谓词。然而，我们也可以用NSCompoundPredicate来完成同样的工作。</strong>    </p>
+<p>下面的谓词是相等的：  </p>
+<pre><code><span class="name">NSPredicate</span> *<span class="atom">orPredicate</span> = [<span class="name">NSPredicate</span> <span class="atom">predicateWithFormat</span>:@<span class="string">"firstName == %@ OR firstName == %@"</span>,@<span class="string">"Alice"</span>,@<span class="string">"Aharlie"</span>];
+   //[<span class="string">"Alice Smith"</span>],[<span class="string">"Aharlie Smith"</span>]
+   <span class="name">NSLog</span>(@<span class="string">"inpredicate = %@"</span>,[<span class="atom">people</span> <span class="atom">filteredArrayUsingPredicate</span>:<span class="atom">orPredicate</span>]);
+   <span class="name">NSCompoundPredicate</span> *<span class="atom">compoundPredicate</span> = [<span class="name">NSCompoundPredicate</span> <span class="atom">orPredicateWithSubpredicates</span>:@[[<span class="name">NSPredicate</span> <span class="atom">predicateWithFormat</span>:@<span class="string">"firstName == %@"</span>,@<span class="string">"Alice"</span>],[<span class="name">NSPredicate</span> <span class="atom">predicateWithFormat</span>:@<span class="string">"firstName == %@"</span>,@<span class="string">"Aharlie"</span>]]];
+   <span class="name">NSLog</span>(@<span class="string">"compoundPredicate = %@"</span>,[<span class="atom">people</span> <span class="atom">filteredArrayUsingPredicate</span>:<span class="atom">compoundPredicate</span>]);
+</code></pre><h3 id="匹配用法">匹配用法</h3><blockquote>
+<p>NSPredicate 不仅可以用于筛选,还可以用于判断是否匹配，直接返回是否符合。  </p>
+<p>方法： - (BOOL)evaluateWithObject:(id)object;  </p>
+</blockquote>
+<p>使用方法:  </p>
+<pre><code>Test *<span class="built_in">test</span>1 = [[Test alloc]init];
+<span class="built_in">test</span>1.name = @<span class="string">"absr"</span>;
+<span class="built_in">test</span>1.code = @<span class="number">1</span>;
+NSPredicate *pres = [NSPredicate predicateWithFormat:@<span class="string">"code == %@"</span>, @<span class="number">2</span>];
+BOOL match = [pres evaluateWithObject:<span class="built_in">test</span>1];  
+</code></pre><p>比较常用的还是配合正则表达式，列举几个常用的正则表达式： </p>
+<p>1.是否以a开头以e结尾。</p>
+<pre><code><span class="built_in">NSString</span> *string=<span class="string">@"assdbfe"</span>;
+<span class="built_in">NSString</span> *targetString=<span class="string">@"^a.+e$"</span>;
+<span class="built_in">NSPredicate</span> *pres = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"SELF MATCHES %@"</span>, targetString];
+<span class="built_in">BOOL</span> match = [pres evaluateWithObject:string];  
+</code></pre><p>2.是否是邮箱 </p>
+<pre><code><span class="label">NSString</span> *<span class="keyword">strRegex </span>= <span class="comment">@"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{1,5}";</span>
+</code></pre><p>3、是否是手机号：(包含了181，1700，1709，1705字段） </p>
+<pre><code>+ (BOOL)isMobileNumber:(NSString <span class="keyword">*</span>)mobileNum
+{
+    /<span class="keyword">*</span><span class="keyword">*</span>
+     <span class="keyword">*</span>  中国移动：China Mobile
+     <span class="keyword">*</span>
+     <span class="keyword">*</span>  134[0-8],135,136,137,138,139,147,150,151,157,158,159,182,183,187,188,1705
+     <span class="keyword">*</span>
+     <span class="keyword">*</span>/
+    NSString <span class="keyword">*</span> CM = <span class="comment">@"^1((34[0-8]|(3[5-9]|5[017-9]|8[2378])|47\\d)|705)\\d{7}$";</span>
+    /<span class="keyword">*</span><span class="keyword">*</span>
+     <span class="keyword">*</span>  中国联通：China Unicom
+     <span class="keyword">*</span>
+     <span class="keyword">*</span>  130,131,132,152,155,156,185,186,1709
+     <span class="keyword">*</span>
+     <span class="keyword">*</span>/
+    NSString <span class="keyword">*</span> CU = <span class="comment">@"^1((3[0-2]|5[256]|8[56])[0-9]|709)\\d{7}$";</span>
+    /<span class="keyword">*</span><span class="keyword">*</span>
+     <span class="keyword">*</span>  中国电信：China Telecom
+     <span class="keyword">*</span>
+     <span class="keyword">*</span>  133,1349,153,180,189,181,177,1700
+     <span class="keyword">*</span>
+     <span class="keyword">*</span>/
+    NSString <span class="keyword">*</span> CT = <span class="comment">@"^1((33|53|77|8[019])[0-9]|349|700)\\d{7}$";</span>
+    NSPredicate <span class="keyword">*</span>regextestcm = [NSPredicate predicateWithFormat:<span class="comment">@"SELF MATCHES %@", CM];</span>
+    NSPredicate <span class="keyword">*</span>regextestcu = [NSPredicate predicateWithFormat:<span class="comment">@"SELF MATCHES %@", CU];</span>
+    NSPredicate <span class="keyword">*</span>regextestct = [NSPredicate predicateWithFormat:<span class="comment">@"SELF MATCHES %@", CT];</span>
+    if (
+        ([regextestcm evaluateWithObject:mobileNum] == YES)
+        ||<span class="string"> ([regextestcu evaluateWithObject:mobileNum] == YES)
+        </span>||<span class="string"> ([regextestct evaluateWithObject:mobileNum] == YES)
+        ){
+        return YES;
+    }
+    else{
+        return NO;
+    }
+}</span>
+</code></pre><p>###谓词语法：  </p>
+<blockquote>
+<p>替换：  %@是对值为字符串，数字或者日期的对象的替换值，<br><strong>%K是key path的替换值。</strong>  </p>
+</blockquote>
+<pre><code><span class="built_in">NSPredicate</span> *Kpredicate = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"%@= %@"</span>,<span class="string">@"age"</span>,@<span class="number">33</span>];
+<span class="comment">//output  Kpredicate : "age" == 33</span>
+   <span class="built_in">NSLog</span>(<span class="string">@"Kpredicate : %@"</span>,Kpredicate);
+   <span class="built_in">NSPredicate</span> *Kpredicate2 = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"%K= %@"</span>,<span class="string">@"age"</span>,@<span class="number">33</span>];
+   <span class="comment">//output： Kpredicate : age == 33</span>
+   <span class="built_in">NSLog</span>(<span class="string">@"Kpredicate : %@"</span>,Kpredicate2);
+
+   <span class="comment">// ["Aharlie Smith"]</span>
+   <span class="built_in">NSLog</span>(<span class="string">@"Age 33: %@"</span>, [people filteredArrayUsingPredicate:Kpredicate2]);  
+</code></pre>  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2016/04/17/NSPredicate/" data-title="个人博客" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/03/29/UITextField修改placeholder的字体和颜色/"  title="UITextField修改placeholder的字体和颜色">
+ <strong>下一篇：</strong><br/> 
+ <span>UITextField修改placeholder的字体和颜色
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目錄</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tags:_iOS开发学习"><span class="toc-number">1.</span> <span class="toc-text">tags: iOS开发学习</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在集合中使用NSPredicate"><span class="toc-number">2.</span> <span class="toc-text">在集合中使用NSPredicate</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常用筛选方法："><span class="toc-number">2.1.</span> <span class="toc-text">常用筛选方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#利用成员实例的方法_，类似上面的方法。"><span class="toc-number">2.1.1.</span> <span class="toc-text">利用成员实例的方法 ，类似上面的方法。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BEGINSWITH(以某个字符串开头，begins_with)_&&_ENDSWITH(ends_with_以某个字符串结尾)"><span class="toc-number">2.1.2.</span> <span class="toc-text">BEGINSWITH(以某个字符串开头，begins with) && ENDSWITH(ends with 以某个字符串结尾)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#通配符LIKE_*代表一个或者多个或者是空字符,_?代表一个字符_。"><span class="toc-number">2.1.3.</span> <span class="toc-text">通配符LIKE   *代表一个或者多个或者是空字符, ?代表一个字符 。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#关系运算_IN_,BETWEEN_,AND_,OR,NOT_IN"><span class="toc-number">2.1.4.</span> <span class="toc-text">关系运算 IN ,BETWEEN ,AND ,OR,NOT IN</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSCompoundPredicate"><span class="toc-number">2.2.</span> <span class="toc-text">NSCompoundPredicate</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匹配用法"><span class="toc-number">2.3.</span> <span class="toc-text">匹配用法</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分類</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/UI-设计/" title="UI 设计">UI 设计<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">標簽</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/iOS总结/" title="iOS总结">iOS总结<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/iOS学习记录/" title="iOS学习记录">iOS学习记录<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/UI-设计/" title="UI 设计">UI 设计<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情鏈接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Larry Page in Google. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="ChenHao">ChenHao</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

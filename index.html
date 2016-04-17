@@ -81,6 +81,69 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2016/04/17/NSPredicate/" title="" itemprop="url"></a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="ChenHao" target="_blank" itemprop="author">ChenHao</a>
+		
+  <p class="article-time">
+    <time datetime="2016-04-17T14:09:19.000Z" itemprop="datePublished"> 發表於 2016-04-17</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>title: NSPredicate的使用<br>date: 2016-04-17 22:07:43</p>
+<h2 id="tags:_iOS开发学习">tags: iOS开发学习</h2><p>NSPredicate（谓词）,是一个Foundation类,<strong>可以使用它指定数据被获取或者过滤的方式</strong>。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，<strong>来定义一个集合被搜寻的逻辑条件。</strong>  </p>
+<h2 id="在集合中使用NSPredicate">在集合中使用NSPredicate</h2><p>Foundation中提供了使用<code>NSPredicate</code>来过滤<code>NSArray／NSMutableArray&amp;NSSet／NSMutableSet</code>的方法。</p>
+<p>不可变的集合，<code>NSArray&amp;NSSet</code>，有可以通过评估接收到的predicate来返回一个不可变集合的方法<code>filteredArrayUsingPredicate:</code>和<code>filteredSetUsingPredicate:。</code>  可变集合，<code>NSMutableArray&amp;NSMutableSet</code>，可以使用方法<code>filterUsingPredicate:</code><strong>，它可以通过运行接收到的谓词来移除评估结果为FALSE的对象。</strong></p>
+<pre><code><span class="built_in">NSArray</span> *array = @[<span class="string">@"jim"</span>,<span class="string">@"cook"</span>,<span class="string">@"jobs"</span>,<span class="string">@"sdevm"</span>];
+    <span class="built_in">NSPredicate</span> *preLength = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"length &gt; 3"</span>];
+    <span class="built_in">NSLog</span>(<span class="string">@"array = %@"</span>,array);
+    <span class="built_in">NSLog</span>(<span class="string">@"array precidate=%@"</span>,[array filteredArrayUsingPredicate:preLength]);
+
+    <span class="built_in">NSMutableArray</span> *muArray = [<span class="built_in">NSMutableArray</span> arrayWithObjects:<span class="string">@"jim"</span>,<span class="string">@"cook"</span>,<span class="string">@"jobs"</span>,<span class="string">@"sdevm"</span>, <span class="literal">nil</span>];
+    [muArray filterUsingPredicate:preLength];
+    <span class="built_in">NSLog</span>(<span class="string">@"muArray=%@"</span>,muArray);  
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2016/04/17/NSPredicate/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2016/03/29/UITextField修改placeholder的字体和颜色/" title="UITextField修改placeholder的字体和颜色" itemprop="url">UITextField修改placeholder的字体和颜色</a>
   </h1>
   <p class="article-author">By
@@ -95,8 +158,7 @@
     <div class="article-content">
         
         <p>如何修改UITextField中placeholder的字体和颜色。</p>
-<p>##一、通过UITextField的attributedPlaceholder属性来实现。 </p>
-<pre><code><span class="built_in">UITextField</span> *textField = [[<span class="built_in">UITextField</span> alloc] initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">100</span>, <span class="number">100</span>, <span class="number">100</span>, <span class="number">20</span>)];
+<h2 id="一、通过UITextField的attributedPlaceholder属性来实现。">一、通过UITextField的attributedPlaceholder属性来实现。</h2><pre><code><span class="built_in">UITextField</span> *textField = [[<span class="built_in">UITextField</span> alloc] initWithFrame:<span class="built_in">CGRectMake</span>(<span class="number">100</span>, <span class="number">100</span>, <span class="number">100</span>, <span class="number">20</span>)];
 textField<span class="variable">.attributedPlaceholder</span> = [[<span class="built_in">NSAttributedString</span> alloc] initWithString:<span class="string">@"i am placeholder."</span>
                                                               attributes:@{<span class="built_in">NSForegroundColorAttributeName</span> : [<span class="built_in">UIColor</span> redColor],
                                                                <span class="built_in">NSFontAttributeName</span> : [<span class="built_in">UIFont</span> systemFontOfSize:<span class="number">6</span>]
