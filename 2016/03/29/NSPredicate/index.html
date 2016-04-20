@@ -3,35 +3,30 @@
 <head>
   <meta charset="utf-8">
   
-  <title>个人博客 | null</title>
+  <title>NSpredicate使用 | 个人博客 | null</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="">
-  <meta name="description" content="title: NSPredicate的使用date: 2016-04-17 22:07:43tags: iOS开发学习  
-
-NSPredicate（谓词）,是一个Foundation类,可以使用它指定数据被获取或者过滤的方式。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，来定义一个集合被搜寻的逻辑条件。  
-在集合中使用NSPredicateFoundation中提供了使用NSPre">
+  <meta name="keywords" content="iOS总结">
+  <meta name="description" content="NSPredicate（谓词）,是一个Foundation类,可以使用它指定数据被获取或者过滤的方式。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，来定义一个集合被搜寻的逻辑条件。  
+在集合中使用NSPredicateFoundation中提供了使用NSPredicate来过滤NSArray／NSMutableArray&amp;amp;NSSet／NSMutableSet的方法。
+不可变的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="个人博客">
-<meta property="og:url" content="http://yoursite.com/2016/04/17/NSPredicate/index.html">
+<meta property="og:title" content="NSpredicate使用">
+<meta property="og:url" content="http://yoursite.com/2016/03/29/NSPredicate/index.html">
 <meta property="og:site_name" content="个人博客">
-<meta property="og:description" content="title: NSPredicate的使用date: 2016-04-17 22:07:43tags: iOS开发学习  
-
-NSPredicate（谓词）,是一个Foundation类,可以使用它指定数据被获取或者过滤的方式。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，来定义一个集合被搜寻的逻辑条件。  
-在集合中使用NSPredicateFoundation中提供了使用NSPre">
-<meta property="og:updated_time" content="2016-04-17T14:11:30.000Z">
+<meta property="og:description" content="NSPredicate（谓词）,是一个Foundation类,可以使用它指定数据被获取或者过滤的方式。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，来定义一个集合被搜寻的逻辑条件。  
+在集合中使用NSPredicateFoundation中提供了使用NSPredicate来过滤NSArray／NSMutableArray&amp;amp;NSSet／NSMutableSet的方法。
+不可变的">
+<meta property="og:updated_time" content="2016-04-20T13:53:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="个人博客">
-<meta name="twitter:description" content="title: NSPredicate的使用date: 2016-04-17 22:07:43tags: iOS开发学习  
-
-NSPredicate（谓词）,是一个Foundation类,可以使用它指定数据被获取或者过滤的方式。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，来定义一个集合被搜寻的逻辑条件。  
-在集合中使用NSPredicateFoundation中提供了使用NSPre">
+<meta name="twitter:title" content="NSpredicate使用">
+<meta name="twitter:description" content="NSPredicate（谓词）,是一个Foundation类,可以使用它指定数据被获取或者过滤的方式。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，来定义一个集合被搜寻的逻辑条件。  
+在集合中使用NSPredicateFoundation中提供了使用NSPredicate来过滤NSArray／NSMutableArray&amp;amp;NSSet／NSMutableSet的方法。
+不可变的">
   
     <link rel="alternative" href="/atom.xml" title="个人博客" type="application/atom+xml">
   
-  <meta name="summary" content="&lt;p&gt;title: NSPredicate的使用&lt;br&gt;date: 2016-04-17 22:07:43&lt;br&gt;tags: iOS开发学习  &lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;NSPredicate（谓词）,是一个Foundation类,&lt;strong&gt;可以使用它指定数据被获取或者过滤的方式&lt;/strong&gt;。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，&lt;strong&gt;来定义一个集合被搜寻的逻辑条件。&lt;/strong&gt;  &lt;/p&gt;
+  <meta name="summary" content="&lt;p&gt;NSPredicate（谓词）,是一个Foundation类,&lt;strong&gt;可以使用它指定数据被获取或者过滤的方式&lt;/strong&gt;。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，&lt;strong&gt;来定义一个集合被搜寻的逻辑条件。&lt;/strong&gt;  &lt;/p&gt;
 &lt;h2 id=&quot;在集合中使用NSPredicate&quot;&gt;在集合中使用NSPredicate&lt;/h2&gt;&lt;p&gt;Foundation中提供了使用&lt;code&gt;NSPredicate&lt;/code&gt;来过滤&lt;code&gt;NSArray／NSMutableArray&amp;amp;NSSet／NSMutableSet&lt;/code&gt;的方法。&lt;/p&gt;
 &lt;p&gt;不可变的集合，&lt;code&gt;NSArray&amp;amp;NSSet&lt;/code&gt;，有可以通过评估接收到的predicate来返回一个不可变集合的方法&lt;code&gt;filteredArrayUsingPredicate:&lt;/code&gt;和&lt;code&gt;filteredSetUsingPredicate:。&lt;/code&gt;  可变集合，&lt;code&gt;NSMutableArray&amp;amp;NSMutableSet&lt;/code&gt;，可以使用方法&lt;code&gt;filterUsingPredicate:&lt;/code&gt;&lt;strong&gt;，它可以通过运行接收到的谓词来移除评估结果为FALSE的对象。&lt;/strong&gt;&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;&lt;span class=&quot;built_in&quot;&gt;NSArray&lt;/span&gt; *array = @[&lt;span class=&quot;string&quot;&gt;@&quot;jim&quot;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;@&quot;cook&quot;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;@&quot;jobs&quot;&lt;/span&gt;,&lt;span class=&quot;string&quot;&gt;@&quot;sdevm&quot;&lt;/span&gt;];
@@ -127,7 +122,7 @@ NSPredicate（谓词）,是一个Foundation类,可以使用它指定数据被获
         <a href="javascript:;" class="header-icon waves-circle-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">个人博客</div>
+        <div class="flex-col header-title ellipsis">NSpredicate使用</div>
         
         <a href="javascript:;" class="header-icon waves-circle-light" id="menu-share">
             <i class="icon icon-lg icon-share-alt"></i>
@@ -137,8 +132,8 @@ NSPredicate（谓词）,是一个Foundation类,可以使用它指定数据被获
 </header>
 <header class="content-header">
   <div class="container">
-    <h1 class="author">个人博客</h1>
-    <h5 class="subtitle">2016-04-17</h5>
+    <h1 class="author">NSpredicate使用</h1>
+    <h5 class="subtitle">2016-03-29</h5>
   </div>
 </header>
 
@@ -147,7 +142,9 @@ NSPredicate（谓词）,是一个Foundation类,可以使用它指定数据被获
   <article id="post-NSPredicate" class="article article-type-post" itemprop="blogPost">
     
       <div class="post-meat flex-row">
-        <div class="flex-col"></div>
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS总结/">iOS总结</a></li></ul>
+</div>
       </div>
       <div class="post-body">
 
@@ -201,9 +198,7 @@ NSPredicate（谓词）,是一个Foundation类,可以使用它指定数据被获
 
         <div class="post-main">
 
-            <div class="post-content" id="post-content" itemprop="postContent"><p>title: NSPredicate的使用<br>date: 2016-04-17 22:07:43<br>tags: iOS开发学习  </p>
-<hr>
-<p>NSPredicate（谓词）,是一个Foundation类,<strong>可以使用它指定数据被获取或者过滤的方式</strong>。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，<strong>来定义一个集合被搜寻的逻辑条件。</strong>  </p>
+            <div class="post-content" id="post-content" itemprop="postContent"><p>NSPredicate（谓词）,是一个Foundation类,<strong>可以使用它指定数据被获取或者过滤的方式</strong>。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，<strong>来定义一个集合被搜寻的逻辑条件。</strong>  </p>
 <h2 id="在集合中使用NSPredicate">在集合中使用NSPredicate</h2><p>Foundation中提供了使用<code>NSPredicate</code>来过滤<code>NSArray／NSMutableArray&amp;NSSet／NSMutableSet</code>的方法。</p>
 <p>不可变的集合，<code>NSArray&amp;NSSet</code>，有可以通过评估接收到的predicate来返回一个不可变集合的方法<code>filteredArrayUsingPredicate:</code>和<code>filteredSetUsingPredicate:。</code>  可变集合，<code>NSMutableArray&amp;NSMutableSet</code>，可以使用方法<code>filterUsingPredicate:</code><strong>，它可以通过运行接收到的谓词来移除评估结果为FALSE的对象。</strong></p>
 <pre><code><span class="built_in">NSArray</span> *array = @[<span class="string">@"jim"</span>,<span class="string">@"cook"</span>,<span class="string">@"jobs"</span>,<span class="string">@"sdevm"</span>];
@@ -396,10 +391,15 @@ BOOL match = [pres evaluateWithObject:<span class="built_in">test</span>1];
 <nav class="post-nav flex-row">
   <div class="flex-col waves-block prev">
     
+      <a href="/2016/03/29/UITextField修改placeholder的字体和颜色/" title="UITextField修改placeholder的字体和颜色" id="post-prev" class="post-nav-link">
+        <i class="icon icon-chevron-left"></i>
+        <span class="article-nav-title">上一篇</span>
+      </a>
+    
   </div>
   <div class="flex-col waves-block next">
     
-      <a href="/2016/03/29/UITextField修改placeholder的字体和颜色/" title="UITextField修改placeholder的字体和颜色" id="post-next" class="post-nav-link">
+      <a href="/2016/03/26/tableviewcellsepartoruseless/" title="tableviewcellsepartoruseless" id="post-next" class="post-nav-link">
         <span class="article-nav-title">下一篇</span>
         <i class="icon icon-chevron-right"></i>
       </a>
@@ -413,7 +413,7 @@ BOOL match = [pres evaluateWithObject:<span class="built_in">test</span>1];
             
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="NSPredicate" data-title="" data-url="http://yoursite.com/2016/04/17/NSPredicate/index.html"></div>
+	<div class="ds-thread" data-thread-key="NSPredicate" data-title="NSpredicate使用" data-url="http://yoursite.com/2016/03/29/NSPredicate/index.html"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -452,10 +452,10 @@ BOOL match = [pres evaluateWithObject:<span class="built_in">test</span>1];
 
 <script>
 var BLOG_SHARE = {
-    title: "个人博客",
+    title: "NSpredicate使用",
     pic: "/img/logo.jpg",
     summary: document.getElementsByName('summary')[0].content,
-    url: "http://yoursite.com/2016/04/17/NSPredicate/index.html"
+    url: "http://yoursite.com/2016/03/29/NSPredicate/index.html"
 };
 </script>
 <div class="global-share" id="global-share">

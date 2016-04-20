@@ -124,54 +124,6 @@
   <ul class="post-list">
   
     <li class="post-list-item">
-  <article id="post-NSPredicate" class="article article-type-post" itemprop="blogPost">
-    
-      
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2016/04/17/NSPredicate/">No title</a>
-    </h3>
-  
-
-
-
-      <div class="post-meat flex-row">
-        <div class="flex-col"></div>
-        <time datetime="2016-04-17T14:11:30.000Z" itemprop="datePublished" class="post-tiem">
-  2016-04-17
-</time>
-      </div>
-      <div class="post-content" id="post-content" itemprop="postContent" >
-        
-          <p>title: NSPredicate的使用<br>date: 2016-04-17 22:07:43<br>tags: iOS开发学习  </p>
-<hr>
-<p>NSPredicate（谓词）,是一个Foundation类,<strong>可以使用它指定数据被获取或者过滤的方式</strong>。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，<strong>来定义一个集合被搜寻的逻辑条件。</strong>  </p>
-<h2 id="在集合中使用NSPredicate">在集合中使用NSPredicate</h2><p>Foundation中提供了使用<code>NSPredicate</code>来过滤<code>NSArray／NSMutableArray&amp;NSSet／NSMutableSet</code>的方法。</p>
-<p>不可变的集合，<code>NSArray&amp;NSSet</code>，有可以通过评估接收到的predicate来返回一个不可变集合的方法<code>filteredArrayUsingPredicate:</code>和<code>filteredSetUsingPredicate:。</code>  可变集合，<code>NSMutableArray&amp;NSMutableSet</code>，可以使用方法<code>filterUsingPredicate:</code><strong>，它可以通过运行接收到的谓词来移除评估结果为FALSE的对象。</strong></p>
-<pre><code><span class="built_in">NSArray</span> *array = @[<span class="string">@"jim"</span>,<span class="string">@"cook"</span>,<span class="string">@"jobs"</span>,<span class="string">@"sdevm"</span>];
-    <span class="built_in">NSPredicate</span> *preLength = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"length &gt; 3"</span>];
-    <span class="built_in">NSLog</span>(<span class="string">@"array = %@"</span>,array);
-    <span class="built_in">NSLog</span>(<span class="string">@"array precidate=%@"</span>,[array filteredArrayUsingPredicate:preLength]);
-
-    <span class="built_in">NSMutableArray</span> *muArray = [<span class="built_in">NSMutableArray</span> arrayWithObjects:<span class="string">@"jim"</span>,<span class="string">@"cook"</span>,<span class="string">@"jobs"</span>,<span class="string">@"sdevm"</span>, <span class="literal">nil</span>];
-    [muArray filterUsingPredicate:preLength];
-    <span class="built_in">NSLog</span>(<span class="string">@"muArray=%@"</span>,muArray);  
-</code></pre>
-        
-      </div>
-      <div class="post-footer clearfix">
-        <a href="/2016/04/17/NSPredicate/" class="post-more waves-button-light">MORE</a>
-      </div>
-    
-
-  </article>
-
-
-</li>
-  
-    <li class="post-list-item">
   <article id="post-UITextField修改placeholder的字体和颜色" class="article article-type-post" itemprop="blogPost">
     
       
@@ -207,6 +159,54 @@ textField<span class="variable">.attributedPlaceholder</span> = [[<span class="b
       </div>
       <div class="post-footer clearfix">
         <a href="/2016/03/29/UITextField修改placeholder的字体和颜色/" class="post-more waves-button-light">MORE</a>
+      </div>
+    
+
+  </article>
+
+
+</li>
+  
+    <li class="post-list-item">
+  <article id="post-NSPredicate" class="article article-type-post" itemprop="blogPost">
+    
+      
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/03/29/NSPredicate/">NSpredicate使用</a>
+    </h3>
+  
+
+
+
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS总结/">iOS总结</a></li></ul>
+</div>
+        <time datetime="2016-03-29T02:12:20.000Z" itemprop="datePublished" class="post-tiem">
+  2016-03-29
+</time>
+      </div>
+      <div class="post-content" id="post-content" itemprop="postContent" >
+        
+          <p>NSPredicate（谓词）,是一个Foundation类,<strong>可以使用它指定数据被获取或者过滤的方式</strong>。它的查询语言就像SQL的WHERE和正则表达式的交叉类似，<strong>来定义一个集合被搜寻的逻辑条件。</strong>  </p>
+<h2 id="在集合中使用NSPredicate">在集合中使用NSPredicate</h2><p>Foundation中提供了使用<code>NSPredicate</code>来过滤<code>NSArray／NSMutableArray&amp;NSSet／NSMutableSet</code>的方法。</p>
+<p>不可变的集合，<code>NSArray&amp;NSSet</code>，有可以通过评估接收到的predicate来返回一个不可变集合的方法<code>filteredArrayUsingPredicate:</code>和<code>filteredSetUsingPredicate:。</code>  可变集合，<code>NSMutableArray&amp;NSMutableSet</code>，可以使用方法<code>filterUsingPredicate:</code><strong>，它可以通过运行接收到的谓词来移除评估结果为FALSE的对象。</strong></p>
+<pre><code><span class="built_in">NSArray</span> *array = @[<span class="string">@"jim"</span>,<span class="string">@"cook"</span>,<span class="string">@"jobs"</span>,<span class="string">@"sdevm"</span>];
+    <span class="built_in">NSPredicate</span> *preLength = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"length &gt; 3"</span>];
+    <span class="built_in">NSLog</span>(<span class="string">@"array = %@"</span>,array);
+    <span class="built_in">NSLog</span>(<span class="string">@"array precidate=%@"</span>,[array filteredArrayUsingPredicate:preLength]);
+
+    <span class="built_in">NSMutableArray</span> *muArray = [<span class="built_in">NSMutableArray</span> arrayWithObjects:<span class="string">@"jim"</span>,<span class="string">@"cook"</span>,<span class="string">@"jobs"</span>,<span class="string">@"sdevm"</span>, <span class="literal">nil</span>];
+    [muArray filterUsingPredicate:preLength];
+    <span class="built_in">NSLog</span>(<span class="string">@"muArray=%@"</span>,muArray);  
+</code></pre>
+        
+      </div>
+      <div class="post-footer clearfix">
+        <a href="/2016/03/29/NSPredicate/" class="post-more waves-button-light">MORE</a>
       </div>
     
 
