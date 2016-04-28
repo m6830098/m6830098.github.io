@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>KVC &amp; KVO使用 | 个人博客 | null</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="iOS学习">
+  <meta name="description" content="KVC 基础
+KVC是KeyValue Coding的简称，它是一种可以直接通过字符串的名字(key)来间接访问对象的属性的机制。而不是通过调用Setter、Getter方法访问。  KVO是基于KVC实现的关键技术之一。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KVC & KVO使用">
+<meta property="og:url" content="http://yoursite.com/2016/04/28/KVC/index.html">
+<meta property="og:site_name" content="个人博客">
+<meta property="og:description" content="KVC 基础
+KVC是KeyValue Coding的简称，它是一种可以直接通过字符串的名字(key)来间接访问对象的属性的机制。而不是通过调用Setter、Getter方法访问。  KVO是基于KVC实现的关键技术之一。">
+<meta property="og:image" content="http://7d9kxu.com1.z0.glb.clouddn.com/keypath.jpg">
+<meta property="og:updated_time" content="2016-04-28T07:34:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="KVC & KVO使用">
+<meta name="twitter:description" content="KVC 基础
+KVC是KeyValue Coding的简称，它是一种可以直接通过字符串的名字(key)来间接访问对象的属性的机制。而不是通过调用Setter、Getter方法访问。  KVO是基于KVC实现的关键技术之一。">
+  
+    <link rel="alternative" href="/atom.xml" title="个人博客" type="application/atom+xml">
+  
+  <meta name="summary" content="&lt;h2 id=&quot;KVC_基础&quot;&gt;KVC 基础&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;KVC是KeyValue Coding的简称，它是一种可以直接通过字符串的名字(key)来间接访问对象的属性的机制。而不是通过调用Setter、Getter方法访问。  KVO是基于KVC实现的关键技术之一。&lt;/p&gt;
+&lt;/blockquote&gt;">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <nav id="menu" class="hide" >
+   <div class="inner">
+  <a href="javascript:;" class="header-icon waves-circle-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">ChenHao</h5>
+        <a href="mailto:undefined" title="chenhaoustc@gmail.com" class="mail">chenhaoustc@gmail.com</a>
+      </hgroup>
+    </div>
+  </div>
+  <ul class="nav">
+    
+        <li class="waves-block">
+          <a href="/"  >
+            <i class="icon icon-lg icon-home"></i>
+            主页
+          </a>
+        </li>
+    
+        <li class="waves-block">
+          <a href="/archives"  >
+            <i class="icon icon-lg icon-archives"></i>
+            Archives
+          </a>
+        </li>
+    
+        <li class="waves-block">
+          <a href="/tags"  >
+            <i class="icon icon-lg icon-tags"></i>
+            Tags
+          </a>
+        </li>
+    
+        <li class="waves-block">
+          <a href="https://github.com/perrorchen" target="_blank" >
+            <i class="icon icon-lg icon-github"></i>
+            Github
+          </a>
+        </li>
+    
+        <li class="waves-block">
+          <a href="http://weibo.com/5727139610/profile?topnav=1&wvr=6&is_all=1" target="_blank" >
+            <i class="icon icon-lg icon-weibo"></i>
+            Weibo
+          </a>
+        </li>
+    
+        <li class="waves-block">
+          <a href="/"  >
+            <i class="icon icon-lg icon-link"></i>
+            测试
+          </a>
+        </li>
+    
+  </ul>
+
+  <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>个人博客 &copy; 2016</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+</div>
+
+  </nav>
+  <main id="main">
+    <header class="header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-circle-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">KVC &amp; KVO使用</div>
+        
+        <a href="javascript:;" class="header-icon waves-circle-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">KVC &amp; KVO使用</h1>
+    <h5 class="subtitle">2016-04-28</h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      
+  <article id="post-KVC" class="article article-type-post" itemprop="blogPost">
+    
+      <div class="post-meat flex-row">
+        <div class="flex-col">
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS学习/">iOS学习</a></li></ul>
+</div>
+      </div>
+      <div class="post-body">
+
+        <aside class="post-widget" id="post-widget">
+
+          
+          <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+          
+
+          
+          <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#KVC_基础"><span class="post-toc-text">KVC 基础</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#keys和key_Paths"><span class="post-toc-text">keys和key Paths</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用KVC获取属性值"><span class="post-toc-text">用KVC获取属性值</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用KVC设置属性值"><span class="post-toc-text">用KVC设置属性值</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简单属性的访问方法搜索模式"><span class="post-toc-text">简单属性的访问方法搜索模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#valueForKey:的默认搜索模式"><span class="post-toc-text">valueForKey:的默认搜索模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#KVC设定值的正确性检查"><span class="post-toc-text">KVC设定值的正确性检查</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#为什么要使用KVC"><span class="post-toc-text">为什么要使用KVC</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简化你的代码"><span class="post-toc-text">简化你的代码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#可以获取以及设置任何对象的任何属性的值-(包括私有变量)"><span class="post-toc-text">可以获取以及设置任何对象的任何属性的值.(包括私有变量)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#KVC容器操作"><span class="post-toc-text">KVC容器操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#简单集合运算符：(操作对象必须是集合)"><span class="post-toc-text">简单集合运算符：(操作对象必须是集合)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#对象操作符"><span class="post-toc-text">对象操作符</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#数组和集合操作符"><span class="post-toc-text">数组和集合操作符</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#批处理函数_dictionaryWithValuesForKeys_&&_setValuesForKeysWithDictionnary:"><span class="post-toc-text">批处理函数 dictionaryWithValuesForKeys && setValuesForKeysWithDictionnary:</span></a></li></ol></li></ol></li></ol>
+          </nav>
+          
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" id="post-content" itemprop="postContent"><h2 id="KVC_基础">KVC 基础</h2><blockquote>
+<p>KVC是KeyValue Coding的简称，它是一种可以直接通过字符串的名字(key)来间接访问对象的属性的机制。而不是通过调用Setter、Getter方法访问。  KVO是基于KVC实现的关键技术之一。</p>
+</blockquote>
+<a id="more"></a> 
+<h3 id="keys和key_Paths">keys和key Paths</h3><p>key,是用来识别一个对象的<strong>特定属性</strong>的字符串。必须用ASCII编码，<strong>以小写字母开头，不能有空格</strong>。</p>
+<p>key path是<strong>用.来分隔的keys的字符串</strong>，指定要遍历的对象属性序列。</p>
+<h3 id="用KVC获取属性值">用KVC获取属性值</h3><ul>
+<li><code>valueForKey:</code>返回指定key的值，如果没有与指定key的方法或实例变量，接收者会给自己发送</li>
+<li><code>valueForUndefinedKey:</code>消息，默认的<code>valueForUndefinedKey:</code>实现触<code>发NSUndefinedKeyException</code>异常，子类可以重写这个行为。</li>
+<li><code>valueForKeyPath:</code>返回指定的<code>key path</code>的值，如果没有对应的key对象就会收到<code>valueForUndefinedKey:</code>消息。</li>
+<li><code>dictionaryWithValuesForKeys:</code> 返回一个数组keys的值。返回的<code>NSDictionary</code>包含对应的<code>key</code>和<code>value.</code></li>
+</ul>
+<h3 id="用KVC设置属性值">用KVC设置属性值</h3><ul>
+<li><code>setValue:forKey:</code>设置指定key的值，<code>setValue:forKey:</code>的默认实现会自动展开表示scalar和结构体的NSValue对象，并给属性赋值。如果指定的key不存在，接收者会收到<code>setValue:forUndefinedKey:</code>消息，默认的实现也会触发<code>NSUndefinedKeyException</code>异常，子类可以重写该方法。</li>
+<li><code>setValue:forKeyPath:</code>跟单个key差不多的做法。</li>
+<li><code>setValuesForKeysWithDictionary:</code>用NSDictionary的keys来指定相应属性的值，默认实现会调用<code>setValue:forKey:</code>，如果需要用nil来替换NSNull对象。</li>
+</ul>
+<blockquote>
+<p>如果尝试给一个非对象属性设置nil值，接收者会给自己发送setNilValueForKey:消息，默认实现会触发NSInvalidArgumentException异常。应用可以重写该方法替换一个默认值或标记值，然后调用setValue:forKey:来设置新值。  </p>
+</blockquote>
+<h3 id="简单属性的访问方法搜索模式">简单属性的访问方法搜索模式</h3><ul>
+<li>搜索接收者的类是否有方法的名字匹配set<key>:。如果成员使用了<code>@property ，@synthsize</code> 处理，<code>@synthsize</code>告诉编译器自动生成set:格式的setter方法，所以这种情况下会直接搜索到。</key></li>
+<li>如果没有找到相应的方法，并且接收者的类方法<strong>accessInstanceVariablesDirectly</strong>返回<code>YES</code>，搜索接收者的实例变量的名字是否有按下面顺序匹配的，<code>_&lt;key&gt;, _is&lt;Key&gt;, &lt;key&gt;, or is&lt;Key&gt;</code>。<strong>(包括私有变量)</strong></li>
+<li>如果找到了访问方法或实例变量，就对它进行赋值</li>
+<li>如果没有找到对应的访问方法或实例变量，调用接收者的setValue:forUndefinedKey:</li>
+</ul>
+<h3 id="valueForKey:的默认搜索模式">valueForKey:的默认搜索模式</h3><ul>
+<li>搜索接收者类的访问方法名称是否有按<code>get&lt;Key&gt;, &lt;key&gt;, or is&lt;Key&gt;</code>这个顺序匹配的。如果有这样的方法就调用。如果方法的返回值类型是对象指针就直接返回。如果返回值类型是<code>scalar</code>(简单)类型，并且可以转换为<code>NSNumber</code>，就返回<code>NSNumber</code>。其他的就转化为<code>NSValue</code>并返回。</li>
+<li>上面的getter没有找到，查找countOf、objectInAtIndex:、AtIndexes格式的方法。如果countOf和另外两个方法中的一个找到，那么就会返回一个可以响应NSArray所有方法的代理集合(collection proxy object)。发送给这个代理集合(collection proxy object)的NSArray消息方法，就会以countOf、objectInAtIndex:、AtIndexes这几个方法组合的形式调用。还有一个可选的get:range:方法。</li>
+<li>还没查到，那么查找countOf、enumeratorOf、memberOf:格式的方法。<br>如果这三个方法都找到，那么就返回一个可以响应NSSet所有方法的代理集合(collection proxy object)。发送给这个代理集合(collection proxy object)的NSSet消息方法，就会以countOf、enumeratorOf、memberOf:组合的形式调用。</li>
+<li>还是没查到，那么如果类方法accessInstanceVariablesDirectly返回YES，那么按_，_is，，is的顺序直接搜索成员名。</li>
+</ul>
+<h3 id="KVC设定值的正确性检查">KVC设定值的正确性检查</h3><blockquote>
+<p>KVC提供属性值确认的API，它可以用来检查set的值是否正确、为不正确的值做一个替换值或者拒绝设置新值并返回错误原因。  </p>
+</blockquote>
+<p>实现检查方法的格式： <code>validate+属性名字:error:</code><br>如果有个属性name，则设置检查方法如下代码所示： </p>
+<pre><code><span class="comment">//如果不想让类的name中不存在前后的空白字符,则实现KVV</span>
+- (<span class="built_in">BOOL</span>)validateName:(<span class="built_in">NSString</span> **)ioValue error:( <span class="built_in">NSError</span> * __autoreleasing *)outError
+{
+    <span class="comment">//如果要设置的name的value值为nil或者长度要大于等于2</span>
+    <span class="keyword">if</span> (*ioValue == <span class="literal">nil</span>) {
+        *ioValue = <span class="string">@""</span>;
+        <span class="keyword">return</span> <span class="literal">YES</span>;
+    }
+    <span class="keyword">else</span>
+    {
+        <span class="built_in">NSString</span> *str = [*ioValue stringByTrimmingCharactersInSet:[<span class="built_in">NSCharacterSet</span> whitespaceCharacterSet]];
+        <span class="built_in">NSArray</span> *compont = [ str componentsSeparatedByCharactersInSet:[<span class="built_in">NSCharacterSet</span> whitespaceCharacterSet]];
+        compont = [compont filteredArrayUsingPredicate:[<span class="built_in">NSPredicate</span> predicateWithBlock:^<span class="built_in">BOOL</span>(<span class="keyword">id</span>  _Nonnull evaluatedObject, <span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *,<span class="keyword">id</span>&gt; * _Nullable bindings) {
+            <span class="keyword">return</span> (<span class="number">0</span> &lt; [evaluatedObject length]);
+        }]];
+        *ioValue = [compont componentsJoinedByString:<span class="string">@" "</span>];
+    }
+    <span class="keyword">return</span> <span class="literal">YES</span>;
+}
+</code></pre><hr>
+<h2 id="为什么要使用KVC">为什么要使用KVC</h2><blockquote>
+<p>KVC可以用来获取3类不同类型的对象值：<code>attributes</code>, <code>to-one relationships</code>, 和 <code>to-many relationships</code> 。术语property就是指这些类型的任意一种。</p>
+</blockquote>
+<ul>
+<li>列表项attribute, 简单的值，如scalar(char, NSTimeInterval, int, float, or double等), string, 布尔值， Value objects也是。</li>
+<li><code>A property that specifies a to-one relationship is an object that has properties of its own. These underlying properties can change without the object itself changing. For example, an NSView instance’s superview is a to-one relationship.</code></li>
+<li><code>a property that specifies a to-many relationship consists of a collection of related objects</code></li>
+</ul>
+<h3 id="简化你的代码">简化你的代码</h3><p>当我们需要统计很多<code>People</code>的时候，每一行是一个人的实例，并且有2列属性，name, age, 这时候我们可以会这样做</p>
+<pre><code>- (id)<span class="string">tableView:</span>(NSTableView *)tableview
+<span class="label">      objectValueForTableColumn:</span>(id)column <span class="string">row:</span>(NSInteger)row {
+
+    People *people = [peoleArray <span class="string">objectAtIndex:</span>row];
+    <span class="keyword">if</span> ([[column identifier] <span class="string">isEqualToString:</span>@<span class="string">"name"</span>]) {
+        <span class="keyword">return</span> [people name];
+    }
+    <span class="keyword">if</span> ([[column identifier] <span class="string">isEqualToString:</span>@<span class="string">"age"</span>]) {
+        <span class="keyword">return</span> [people age];
+    }
+    <span class="comment">// And so on.</span>
+}
+</code></pre><p>使用了KVC之后，可以帮助简化这些<code>if else</code>，因为<code>name age</code> 都是<code>property</code>，可以直接通过key访问。整理之后</p>
+<pre><code>- (id)<span class="string">tableView:</span>(NSTableView *)tableview
+<span class="label">    objectValueForTableColumn:</span>(id)column <span class="string">row:</span>(NSInteger)row {
+    ChildObject *child = [childrenArray <span class="string">objectAtIndex:</span>row];
+    <span class="keyword">return</span> [child <span class="string">valueForKey:</span>[column identifier]];
+}
+</code></pre><p>如果属性很多的话，可以极大的简化代码。</p>
+<h3 id="可以获取以及设置任何对象的任何属性的值-(包括私有变量)">可以获取以及设置任何对象的任何属性的值.(包括私有变量)</h3><p><strong>验证代码：</strong>  </p>
+<pre><code><span class="class"><span class="keyword">@interface</span> <span class="title">Author</span> : <span class="title">NSObject</span></span>
+{
+    <span class="built_in">NSString</span> *privateVar;
+}
+<span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSString</span> *name;
+<span class="keyword">@end</span>
+<span class="class"><span class="keyword">@implementation</span> <span class="title">Author</span></span>
+<span class="keyword">@end</span>
+</code></pre><p>如果下面这样用<strong>dot+属性</strong>访问是编译不过去的，因为没有<code>getter和setter</code>方法。</p>
+<pre><code>Author *<span class="keyword">au</span> = [Author <span class="keyword">new</span>];
+<span class="keyword">au</span>.privateVar = @<span class="string">"private"</span>;
+</code></pre><p>那么使用KVC就可以做到访问实例变量，并使得程序正常运行。</p>
+<pre><code>Author *au = [Author <span class="keyword">new</span>];
+[au <span class="string">setValue:</span>@<span class="string">"private"</span> <span class="string">forKey:</span>@<span class="string">"privateVar"</span>];
+NSLog(@<span class="string">"%@"</span>,[au <span class="string">valueForKey:</span>@<span class="string">"privateVar"</span>]);
+</code></pre><p>如果我们把这个变量用@private声明，那么也可以做到访问。</p>
+<pre><code><span class="variable">@interface</span> <span class="attribute">Author </span>: NSObject
+{
+<span class="variable">@private</span> NSString *_privateVar;
+}
+<span class="variable">@property</span> (nonatomic, copy) NSString *privateVar;
+<span class="variable">@end</span>
+<span class="variable">@implementation</span> Author
+<span class="variable">@synthesize</span> privateVar = _privateVar;
+<span class="variable">@end</span>
+</code></pre><p>使用的时候依然可以用KVC访问。</p>
+<pre><code>Author *au = [Author <span class="keyword">new</span>];
+[au <span class="string">setValue:</span>@<span class="string">"private"</span> <span class="string">forKey:</span>@<span class="string">"privateVar"</span>];
+NSLog(@<span class="string">"%@"</span>,[au <span class="string">valueForKey:</span>@<span class="string">"privateVar"</span>]);
+</code></pre><blockquote>
+<p><strong>所以obj-C实际上并不存在真正的私有变量，因为只要知道变量名称就可以访问且操作这个变量。</strong>   </p>
+</blockquote>
+<p><strong>虽然我们可以通过KVC给私有变量赋值，但是就不意味着可以肆无忌惮的修改苹果系统规定过的私有变量或者只读权限。在app 上架前深刻的过程中，苹果官方会对这类做法严格检查的。我们可以修改自定义类里面的私有属性和权限。</strong></p>
+<blockquote>
+<p>UITextField的placeholder其实就是个UILabel，我们拿到它的真实属性名，就可以通过KVC赋值了。  </p>
+</blockquote>
+<pre><code>UITextField *textField = [[UITextField alloc] <span class="string">initWithFrame:</span>CGRectMake(<span class="number">100</span>, <span class="number">100</span>, <span class="number">100</span>, <span class="number">20</span>)];
+       textField.placeholder = @<span class="string">"i am placeholder."</span>;
+       [textField <span class="string">setValue:</span>[UIFont <span class="string">systemFontOfSize:</span><span class="number">15</span>] <span class="string">forKeyPath:</span>@<span class="string">"_placeholderLabel.font"</span>];
+       [textField <span class="string">setValue:</span>[UIColor redColor] <span class="string">forKeyPath:</span>@<span class="string">"_placeholderLabel.textColor"</span>];
+       <span class="comment">// 如果你愿意的话，placehloder本身也可以通过KVC赋值</span>
+       [textField <span class="string">setValue:</span>@<span class="string">"abc"</span> <span class="string">forKeyPath:</span>@<span class="string">"_placeholderLabel.text"</span>];
+       [self.view <span class="string">addSubview:</span>textField];  
+</code></pre><h3 id="KVC容器操作">KVC容器操作</h3><p><code>valueForKey:</code>的使用并不仅仅用来取值那么简单，还有很多特殊的用法，<strong>集合类也覆盖了这个方法</strong>，通过调用<code>valueForKey:</code>给容器中<strong>每一个对象发送</strong>操作消息，<strong>并且结果会被保存在一个新的容器中返回</strong>，这样我们能很方便地利用一个容器对象创建另一个容器对象。另外，valueForKeyPath:还能实现多个消息的传递。一个例子: </p>
+<pre><code><span class="comment">//1.KVC 容器使用valueforkeypath</span>
+   <span class="built_in">NSArray</span> *array = [<span class="built_in">NSArray</span> arrayWithObjects:<span class="string">@"10.11"</span>, <span class="string">@"20.22"</span>,<span class="literal">nil</span>];
+   <span class="built_in">CGFloat</span> a = <span class="number">10.11</span>;
+   <span class="built_in">CGFloat</span> b = <span class="number">20.22</span>;
+   <span class="built_in">NSArray</span> *array2 = [<span class="built_in">NSArray</span> arrayWithObjects:[<span class="built_in">NSNumber</span> numberWithFloat:a],[<span class="built_in">NSNumber</span> numberWithFloat:b],<span class="literal">nil</span>];
+   <span class="built_in">NSArray</span> *resultArray = [array valueForKeyPath:<span class="string">@"doubleValue.intValue"</span>];
+   <span class="built_in">NSArray</span> *resultArray2 = [array2 valueForKeyPath:<span class="string">@"doubleValue.intValue"</span>];
+   <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, resultArray);
+   <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, resultArray2);
+   <span class="comment">//打印结果 (     10,     20 </span>
+</code></pre><blockquote>
+<p>容器不仅仅能使用KVC方法实现对容器成员传递普通的操作消息，KVC还定义了特殊的一些常用操作，使用valueForKeyPath:结合操作符来使用，所定义的keyPath格式入下图所示： </p>
+</blockquote>
+<p>KVC 的<strong>集合操作符</strong>可使用键路径和操作运算作用于集合中的所有元素，实际上就是一些特殊的键路径，以参数的形式传递给 <code>valueForKeyPath:</code> 方法。集合操作是以 @ 开始的字符串, 也可理解为: KVC集合操作符允许在 <code>valueForKeyPath:</code> 方法中使用 <code>key path</code> 符号在一个集合中执行方法。无论什么时候你在 <code>key path</code> 中看见了@，它都代表了一个特定的集合方法，其结果可以被返回或者链接，就像其他的 <code>key path</code> 一样。下图就是集合操作符的格式:   </p>
+<p><img src="http://7d9kxu.com1.z0.glb.clouddn.com/keypath.jpg" alt="集合操作符路径"></p>
+<p> <strong>其中左边的键路径(keypathToCollection)指定了相对消息接收者的 NSArray 或者 NSSet，右边的键路径(keypathToProperty)指定了相对于集合内对象的</strong>键路径<strong>，集合操作作用于该键路径。</strong>       </p>
+<p>集合运算符会根据其返回值的不同分为以下三种类型：</p>
+<ul>
+<li>简单的集合运算符 返回的是strings, number, 或者 dates</li>
+<li>对象运算符 返回的是一个数组</li>
+<li>数组和集合运算符 返回的是一个数组或者集合  </li>
+</ul>
+<h4 id="简单集合运算符：(操作对象必须是集合)">简单<strong>集合运算符</strong>：(操作对象必须是集合)</h4><ul>
+<li><code>@count:</code> 返回一个值为集合中对象总数的NSNumber对象。</li>
+<li><code>@sum:</code> 首先把集合中的每个对象都转换为double类型，然后计算其总，最后返回一个值为这个总和的NSNumber对象。</li>
+<li><code>@avg:</code> 操作符将集合中属性键路径所指对象转换为 double, 计算其平均值，返回该平均值的 NSNumber 对象。当均值为 nil 的时候，返回 0.</li>
+<li><code>@max:</code> 使用compare:方法来确定最大值。所以为了让其正常工作，集合中所有的对象都必须支持和另一个对象的比较。</li>
+<li><code>@min:</code> 和@max一样，但是返回的是集合中的最小值。</li>
+<li></li>
+</ul>
+<blockquote>
+<p>Pro提示：你可以简单的通过把self作为操作符后面的key path来获取一个由NSNumber组成的数组或者集合的总值，例如[@[@(1), @(2), @(3)] valueForKeyPath:@”@max.self”] (/感谢 @davandermobile, 来自 Objective Sea)</p>
+</blockquote>
+<h4 id="对象操作符"><strong>对象</strong>操作符</h4><blockquote>
+<p>对象操作符包括 <code>@distinctUnionOfObjects</code> 和 <code>@unionOfObjects</code>, 返回一个由操作符右边的 <code>key path</code> 所指定的<strong>对象属性组成的数组</strong>。其中 <code>@distinctUnionOfObjects</code> 会对数组去重，而 <code>@unionOfObjects</code> 不会。  </p>
+</blockquote>
+<h4 id="数组和集合操作符"><strong>数组和集合</strong>操作符</h4><p><strong>数则和集合操作符跟对象操作符很相似</strong>，只不过它是在<code>NSArray</code>和<code>NSSet</code>所组成的集合中工作的。</p>
+<ul>
+<li><code>@distinctUnionOfArrays / @unionOfArrays:</code> 返回了一个数组，其中包含这个集合中每个数组对于这个操作符右面指定的key path进行操作之后的值。正如你期望的，distinct版本会移除重复的值。</li>
+<li><code>@distinctUnionOfSets: 和@distinctUnionOfArrays</code>差不多, 但是它期望的是一个包含着NSSet对象的NSSet，并且会返回一个NSSet对象。因为集合不能包含重复的值，所以它只有distinct操作</li>
+</ul>
+<h4 id="批处理函数_dictionaryWithValuesForKeys_&amp;&amp;_setValuesForKeysWithDictionnary:">批处理函数 dictionaryWithValuesForKeys &amp;&amp; setValuesForKeysWithDictionnary:</h4><blockquote>
+<p><code>dictionaryWithValuesForKeys:</code>方法，通过传入key数组，返回一个成员变量名（不加下划线）和变量值的键值对组成的字典。</p>
+</blockquote>
+<pre><code>People *pDic = [People <span class="keyword">new</span>];
+    [pDic <span class="string">setValue:</span>@<span class="string">"0.12"</span> <span class="string">forKey:</span>@<span class="string">"price"</span>];
+    [pDic <span class="string">setValue:</span>@<span class="string">"chenhao"</span> <span class="string">forKey:</span>@<span class="string">"name"</span>];
+    NSArray *peopleProperties = [NSArray <span class="string">arrayWithObjects:</span>@<span class="string">"name"</span>,@<span class="string">"price"</span>, nil];
+    NSDictionary *peopleDictionary = [pDic <span class="string">dictionaryWithValuesForKeys:</span>peopleProperties];
+
+    NSLog(@<span class="string">"people Values :%@"</span>,peopleDictionary);  
+</code></pre><p>生成一个NSDictionary，打印输出为： </p>
+<pre><code><span class="title">people</span> Values :{
+    <span class="title">name</span> = chenhao;
+    <span class="title">price</span> = <span class="string">"0.12"</span>;
+}
+</code></pre><blockquote>
+<p><code>setValuesForKeysWithDictionnary:</code><br>方法，通过传入字典，初始化相应的键对应的成员变量（同前所述，非常智能的查找）的值为相应的的键值，在MVC设计模式中，模型初始化常用这个方法，一般是写在初始化方法中，通过字典初始化模型数据。</p>
+</blockquote>
+<p>例子： </p>
+<pre><code>People *pDic = [People <span class="keyword">new</span>];
+    [pDic <span class="string">setValue:</span>@<span class="string">"0.12"</span> <span class="string">forKey:</span>@<span class="string">"price"</span>];
+    [pDic <span class="string">setValue:</span>@<span class="string">"chenhao"</span> <span class="string">forKey:</span>@<span class="string">"name"</span>];
+    NSArray *peopleProperties = [NSArray <span class="string">arrayWithObjects:</span>@<span class="string">"name"</span>,@<span class="string">"price"</span>, nil];
+    NSDictionary *peopleDictionary = [pDic <span class="string">dictionaryWithValuesForKeys:</span>peopleProperties];
+
+    NSLog(@<span class="string">"people Values :%@"</span>,peopleDictionary);
+
+    NSDictionary *values = [NSDictionary <span class="string">dictionaryWithObjectsAndKeys:</span>@<span class="string">"chenhao"</span>,@<span class="string">"name"</span>,@<span class="string">"18.0"</span>,@<span class="string">"price"</span>, nil];
+    [pDic <span class="string">setValuesForKeysWithDictionary:</span>values];
+</code></pre><p>###KVC的缺点 </p>
+<p>可以看到KVC确实有很多优点，但是需要清醒一下，滥用KVC并不是什么好的事情。</p>
+<p>缺点：</p>
+<ul>
+<li>KVC需要解析字符串来获取所需要的内容，因此速度较慢。</li>
+<li>编辑器无法对KVC进行字符串错误检查，所以当key错误的时候，会造成运行时错误。</li>
+</ul>
+</div>
+
+            
+<nav class="post-nav flex-row">
+  <div class="flex-col waves-block prev">
+    
+  </div>
+  <div class="flex-col waves-block next">
+    
+      <a href="/2016/03/29/UITextField修改placeholder的字体和颜色/" title="UITextField修改placeholder的字体和颜色" id="post-next" class="post-nav-link">
+        <span class="article-nav-title">下一篇</span>
+        <i class="icon icon-chevron-right"></i>
+      </a>
+    
+  </div>
+
+</nav>
+
+
+
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="KVC" data-title="KVC &amp; KVO使用" data-url="http://yoursite.com/2016/04/28/KVC/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"ysblog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+
+        </div>
+
+      </div>
+
+    
+
+  </article>
+
+
+
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-circle-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>
+var BLOG_SHARE = {
+    title: "KVC & KVO使用",
+    pic: "/img/logo.jpg",
+    summary: document.getElementsByName('summary')[0].content,
+    url: "http://yoursite.com/2016/04/28/KVC/index.html"
+};
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
