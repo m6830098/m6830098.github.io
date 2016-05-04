@@ -7,24 +7,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="keywords" content="iOS学习">
-  <meta name="description" content="KVC 基础
+  <meta name="description" content="KVC &amp;amp; KVO使用标签（空格分隔）： iOS学习
+
+KVC 基础
 KVC是KeyValue Coding的简称，它是一种可以直接通过字符串的名字(key)来间接访问对象的属性的机制。而不是通过调用Setter、Getter方法访问。  KVO是基于KVC实现的关键技术之一。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="KVC & KVO使用">
 <meta property="og:url" content="http://yoursite.com/2016/04/28/KVC/index.html">
 <meta property="og:site_name" content="个人博客">
-<meta property="og:description" content="KVC 基础
+<meta property="og:description" content="KVC &amp;amp; KVO使用标签（空格分隔）： iOS学习
+
+KVC 基础
 KVC是KeyValue Coding的简称，它是一种可以直接通过字符串的名字(key)来间接访问对象的属性的机制。而不是通过调用Setter、Getter方法访问。  KVO是基于KVC实现的关键技术之一。">
 <meta property="og:image" content="http://7d9kxu.com1.z0.glb.clouddn.com/keypath.jpg">
-<meta property="og:updated_time" content="2016-04-28T07:34:08.000Z">
+<meta property="og:updated_time" content="2016-05-04T07:41:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KVC & KVO使用">
-<meta name="twitter:description" content="KVC 基础
+<meta name="twitter:description" content="KVC &amp;amp; KVO使用标签（空格分隔）： iOS学习
+
+KVC 基础
 KVC是KeyValue Coding的简称，它是一种可以直接通过字符串的名字(key)来间接访问对象的属性的机制。而不是通过调用Setter、Getter方法访问。  KVO是基于KVC实现的关键技术之一。">
   
     <link rel="alternative" href="/atom.xml" title="个人博客" type="application/atom+xml">
   
-  <meta name="summary" content="&lt;h2 id=&quot;KVC_基础&quot;&gt;KVC 基础&lt;/h2&gt;&lt;blockquote&gt;
+  <meta name="summary" content="&lt;h1 id=&quot;KVC_&amp;amp;_KVO使用&quot;&gt;KVC &amp;amp; KVO使用&lt;/h1&gt;&lt;p&gt;标签（空格分隔）： iOS学习&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&quot;KVC_基础&quot;&gt;KVC 基础&lt;/h2&gt;&lt;blockquote&gt;
 &lt;p&gt;KVC是KeyValue Coding的简称，它是一种可以直接通过字符串的名字(key)来间接访问对象的属性的机制。而不是通过调用Setter、Getter方法访问。  KVO是基于KVC实现的关键技术之一。&lt;/p&gt;
 &lt;/blockquote&gt;">
   <link rel="shortcut icon" href="/favicon.ico">
@@ -180,14 +188,16 @@ KVC是KeyValue Coding的简称，它是一种可以直接通过字符串的名�
 
           
           <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#KVC_基础"><span class="post-toc-text">KVC 基础</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#keys和key_Paths"><span class="post-toc-text">keys和key Paths</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用KVC获取属性值"><span class="post-toc-text">用KVC获取属性值</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用KVC设置属性值"><span class="post-toc-text">用KVC设置属性值</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简单属性的访问方法搜索模式"><span class="post-toc-text">简单属性的访问方法搜索模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#valueForKey:的默认搜索模式"><span class="post-toc-text">valueForKey:的默认搜索模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#KVC设定值的正确性检查"><span class="post-toc-text">KVC设定值的正确性检查</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#为什么要使用KVC"><span class="post-toc-text">为什么要使用KVC</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简化你的代码"><span class="post-toc-text">简化你的代码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#可以获取以及设置任何对象的任何属性的值-(包括私有变量)"><span class="post-toc-text">可以获取以及设置任何对象的任何属性的值.(包括私有变量)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#KVC容器操作"><span class="post-toc-text">KVC容器操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#简单集合运算符：(操作对象必须是集合)"><span class="post-toc-text">简单集合运算符：(操作对象必须是集合)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#对象操作符"><span class="post-toc-text">对象操作符</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#数组和集合操作符"><span class="post-toc-text">数组和集合操作符</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#批处理函数_dictionaryWithValuesForKeys_&&_setValuesForKeysWithDictionnary:"><span class="post-toc-text">批处理函数 dictionaryWithValuesForKeys && setValuesForKeysWithDictionnary:</span></a></li></ol></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#KVC_&_KVO使用"><span class="post-toc-text">KVC & KVO使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#KVC_基础"><span class="post-toc-text">KVC 基础</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#keys和key_Paths"><span class="post-toc-text">keys和key Paths</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用KVC获取属性值"><span class="post-toc-text">用KVC获取属性值</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#用KVC设置属性值"><span class="post-toc-text">用KVC设置属性值</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简单属性的访问方法搜索模式"><span class="post-toc-text">简单属性的访问方法搜索模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#valueForKey:的默认搜索模式"><span class="post-toc-text">valueForKey:的默认搜索模式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#KVC设定值的正确性检查"><span class="post-toc-text">KVC设定值的正确性检查</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#为什么要使用KVC"><span class="post-toc-text">为什么要使用KVC</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简化你的代码"><span class="post-toc-text">简化你的代码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#可以获取以及设置任何对象的任何属性的值-(包括私有变量)"><span class="post-toc-text">可以获取以及设置任何对象的任何属性的值.(包括私有变量)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#KVC容器操作"><span class="post-toc-text">KVC容器操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#简单集合运算符：(操作对象必须是集合)"><span class="post-toc-text">简单集合运算符：(操作对象必须是集合)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#对象操作符"><span class="post-toc-text">对象操作符</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#数组和集合操作符"><span class="post-toc-text">数组和集合操作符</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#批处理函数_dictionaryWithValuesForKeys_&&_setValuesForKeysWithDictionnary:"><span class="post-toc-text">批处理函数 dictionaryWithValuesForKeys && setValuesForKeysWithDictionnary:</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#KVO的使用"><span class="post-toc-text">KVO的使用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#KVO的使用步骤："><span class="post-toc-text">KVO的使用步骤：</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#注册观察者"><span class="post-toc-text">注册观察者</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#移除观察者"><span class="post-toc-text">移除观察者</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#处理属性修改通知"><span class="post-toc-text">处理属性修改通知</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#属性发生变化,通知观察者"><span class="post-toc-text">属性发生变化,通知观察者</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#计算属性(属性的变化依赖其他属性)"><span class="post-toc-text">计算属性(属性的变化依赖其他属性)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#集合属性的监听"><span class="post-toc-text">集合属性的监听</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#方法1:(实现集合代理对象的相关操作方法)"><span class="post-toc-text">方法1:(实现集合代理对象的相关操作方法)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#方法2:使用mutableArrayValueForKey方法"><span class="post-toc-text">方法2:使用mutableArrayValueForKey方法</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#相关文章："><span class="post-toc-text">相关文章：</span></a></li></ol></li></ol></li></ol>
           </nav>
           
         </aside>
 
         <div class="post-main">
 
-            <div class="post-content" id="post-content" itemprop="postContent"><h2 id="KVC_基础">KVC 基础</h2><blockquote>
+            <div class="post-content" id="post-content" itemprop="postContent"><h1 id="KVC_&amp;_KVO使用">KVC &amp; KVO使用</h1><p>标签（空格分隔）： iOS学习</p>
+<hr>
+<h2 id="KVC_基础">KVC 基础</h2><blockquote>
 <p>KVC是KeyValue Coding的简称，它是一种可以直接通过字符串的名字(key)来间接访问对象的属性的机制。而不是通过调用Setter、Getter方法访问。  KVO是基于KVC实现的关键技术之一。</p>
 </blockquote>
 <a id="more"></a> 
@@ -215,9 +225,9 @@ KVC是KeyValue Coding的简称，它是一种可以直接通过字符串的名�
 </ul>
 <h3 id="valueForKey:的默认搜索模式">valueForKey:的默认搜索模式</h3><ul>
 <li>搜索接收者类的访问方法名称是否有按<code>get&lt;Key&gt;, &lt;key&gt;, or is&lt;Key&gt;</code>这个顺序匹配的。如果有这样的方法就调用。如果方法的返回值类型是对象指针就直接返回。如果返回值类型是<code>scalar</code>(简单)类型，并且可以转换为<code>NSNumber</code>，就返回<code>NSNumber</code>。其他的就转化为<code>NSValue</code>并返回。</li>
-<li>上面的getter没有找到，查找countOf、objectInAtIndex:、AtIndexes格式的方法。如果countOf和另外两个方法中的一个找到，那么就会返回一个可以响应NSArray所有方法的代理集合(collection proxy object)。发送给这个代理集合(collection proxy object)的NSArray消息方法，就会以countOf、objectInAtIndex:、AtIndexes这几个方法组合的形式调用。还有一个可选的get:range:方法。</li>
+<li>上面的getter没有找到，查找<code>countOf&lt;Key&gt;</code>、<code>objectIn&lt;Key&gt;AtIndex</code>:、<code>&lt;Key&gt;AtIndexes</code>格式的方法。如果<code>countOf</code>和另外两个方法中的一个找到，那么就会返回一个可以响应NSArray所有方法的代理集合(collection proxy object)。发送给这个代理集合(collection proxy object)的NSArray消息方法，就会以countOf、objectInAtIndex:、AtIndexes这几个方法组合的形式调用。还有一个可选的get:range:方法。</li>
 <li>还没查到，那么查找countOf、enumeratorOf、memberOf:格式的方法。<br>如果这三个方法都找到，那么就返回一个可以响应NSSet所有方法的代理集合(collection proxy object)。发送给这个代理集合(collection proxy object)的NSSet消息方法，就会以countOf、enumeratorOf、memberOf:组合的形式调用。</li>
-<li>还是没查到，那么如果类方法accessInstanceVariablesDirectly返回YES，那么按_，_is，，is的顺序直接搜索成员名。</li>
+<li>还是没查到，那么如果类方法<code>accessInstanceVariablesDirectly</code>返回YES，那么按_，_is，，is的顺序直接搜索实例变量，但是这种访问操作破坏了封装性，应该尽量避免这样操作，可以通过重写<code>accessInstanceVariablesDirectly</code>方法，返回为NO来避免这种行为。 </li>
 </ul>
 <h3 id="KVC设定值的正确性检查">KVC设定值的正确性检查</h3><blockquote>
 <p>KVC提供属性值确认的API，它可以用来检查set的值是否正确、为不正确的值做一个替换值或者拒绝设置新值并返回错误原因。  </p>
@@ -392,6 +402,174 @@ NSLog(@<span class="string">"%@"</span>,[au <span class="string">valueForKey:</s
 <ul>
 <li>KVC需要解析字符串来获取所需要的内容，因此速度较慢。</li>
 <li>编辑器无法对KVC进行字符串错误检查，所以当key错误的时候，会造成运行时错误。</li>
+</ul>
+<h2 id="KVO的使用">KVO的使用</h2><blockquote>
+<p>NSKeyValueObserving非正式协议定义了一种机制，它允许对象去监听其它对象的某个属性的修改。</p>
+</blockquote>
+<p>KVO可以监听一个对象的属性，包括<strong>简单属性</strong>，一对一的关系，和一对多的关系。一对多关系的监听者会被告知集合变更的类型，以及哪些对象参与了变化。<code>(监听数组会和监听普通的对象有区别)</code>  </p>
+<h2 id="KVO的使用步骤：">KVO的使用步骤：</h2><h3 id="注册观察者">注册观察者</h3><p>要让一个对象监听另一个对象的<strong>属性</strong>的变化，首先需要<strong>将这个对象注册为相关属性的观察者</strong>，使用以下方法来实现：</p>
+<pre><code><span class="pp">- <span class="params">(void)</span>addObserver:<span class="params">(<span class="variable">NSObject</span> *)</span>anObserver
+         forKeyPath:<span class="params">(<span class="variable">NSString</span> *)</span>keyPath
+            options:<span class="params">(<span class="variable">NSKeyValueObservingOptions</span>)</span>options
+            context:<span class="params">(void *)</span>context</span>
+</code></pre><ul>
+<li><code>anObserver：</code>观察者对象，这个对象必须实现<code>observeValueForKeyPath:ofObject:change:context:方法</code>，以响应属性的修改通知。</li>
+<li><code>keyPath：</code>被监听的属性。这个值不能为nil。</li>
+<li><code>options：</code>监听选项，这个值可以是<code>NSKeyValueObservingOptions</code>选项的组合。</li>
+<li><code>context：</code>任意的额外数据，我们可以将这些数据作为<strong>上下文数据</strong>，它会传递给观察者对象的<code>observeValueForKeyPath:ofObject:change:context:</code>方法。这个参数的意义在于用于区分同一对象监听同一属性(从属于同一对象)的多个不同的监听。</li>
+</ul>
+<p><code>NSKeyValueObservingOptions</code>是什么呢？    </p>
+<pre><code><span class="function"><span class="keyword">typedef</span> <span class="title">NS_OPTIONS</span><span class="params">(NSUInteger, NSKeyValueObservingOptions)</span> </span>{
+
+    <span class="comment">// 提供属性的新值</span>
+    NSKeyValueObservingOptionNew = <span class="number">0x01</span>,
+    <span class="comment">// 提供属性的旧值</span>
+    NSKeyValueObservingOptionOld = <span class="number">0x02</span>,
+
+    <span class="comment">// 如果指定，则在每次修改属性时，会在修改通知被发送之前预先发送一条通知给观察者，</span>
+  <span class="comment">// 这与-willChangeValueForKey:被触发的时间是相对应的。</span>
+  <span class="comment">// 这样，在每次修改属性时，实际上是会发送两条通知。</span>
+    <span class="function">NSKeyValueObservingOptionInitial <span class="title">NS_ENUM_AVAILABLE</span><span class="params">(<span class="number">10</span>_5, <span class="number">2</span>_0)</span> </span>= <span class="number">0x04</span>,
+
+    <span class="function">NSKeyValueObservingOptionPrior <span class="title">NS_ENUM_AVAILABLE</span><span class="params">(<span class="number">10</span>_5, <span class="number">2</span>_0)</span> </span>= <span class="number">0x08</span>
+
+};
+</code></pre><p>需要注意的是：</p>
+<blockquote>
+<ul>
+<li>调用这个方法时，两个对象(即观察者对象及属性所属的对象)都不会被<code>retain</code>。</li>
+<li>可以多次调用这个方法，将同一个对象注册为同一属性的观察者(所有参数可以完全相同)。这时，即便在所有参数一致的情况下，新注册的观察者并不会替换原来观察者，而是会并存。这样，当属性被修改时，两次监听都会响应。</li>
+</ul>
+</blockquote>
+<h3 id="移除观察者">移除观察者</h3><p>当观察者不再需要监听属性变化时，必须调用<code>removeObserver:forKeyPath:</code>或<code>removeObserver:forKeyPath:context:</code>方法来移除观察者</p>
+<pre><code><span class="pp">- <span class="params">(void)</span>removeObserver:<span class="params">(<span class="variable">NSObject</span> *)</span>anObserver
+            forKeyPath:<span class="params">(<span class="variable">NSString</span> *)</span>keyPath
+
+- <span class="params">(void)</span>removeObserver:<span class="params">(<span class="variable">NSObject</span> *)</span>observer
+            forKeyPath:<span class="params">(<span class="variable">NSString</span> *)</span>keyPath
+               context:<span class="params">(void *)</span>context</span>
+</code></pre><p><strong>未移除观察者会崩溃，在添加观察者的时候，观察者对象与被观察属性所属的对象都不会被retain，然而在这些对象被释放后，相关的监听信息却还存在，KVO做的处理是直接让程序崩溃。</strong></p>
+<h3 id="处理属性修改通知">处理属性修改通知</h3><blockquote>
+<p>当被监听的属性修改时，KVO会发出一个通知以告知所有监听这个属性的观察者对象。<code>而观察者对象必须实现-observeValueForKeyPath:ofObject:change:context:</code>方法，来对属性修改通知做相应的处理。这个方法的声明如下：</p>
+</blockquote>
+<pre><code><span class="pp">- <span class="params">(void)</span>observeValueForKeyPath:<span class="params">(<span class="variable">NSString</span> *)</span>keyPath
+                      ofObject:<span class="params">(id)</span>object
+                        change:<span class="params">(<span class="variable">NSDictionary</span> *)</span>change
+                       context:<span class="params">(void *)</span>context</span>
+</code></pre><ul>
+<li><code>keyPath：</code>即被观察的属性，与参数object相关。</li>
+<li><code>object：keyPath</code>所属的对象。</li>
+<li><code>change：</code>这是一个字典，它包含了属性被修改的一些信息。这个字典中包含的值会根据我们在添加观察者时设置的<code>options</code>参数的不同而有所不同。</li>
+<li><code>context：</code>这个值即是添加观察者时提供的上下文信息</li>
+</ul>
+<p>第三个参数叫做 <strong>变化字典(Change Dictionary)</strong>,它记录了被监听属性的变化情况。可以通过下面的key来获取想要的value 值。</p>
+<pre><code>FOUNDATION_EXPORT <span class="built_in">NSString</span> *<span class="keyword">const</span> <span class="built_in">NSKeyValueChangeKindKey</span>;
+FOUNDATION_EXPORT <span class="built_in">NSString</span> *<span class="keyword">const</span> <span class="built_in">NSKeyValueChangeNewKey</span>;
+FOUNDATION_EXPORT <span class="built_in">NSString</span> *<span class="keyword">const</span> <span class="built_in">NSKeyValueChangeOldKey</span>;
+FOUNDATION_EXPORT <span class="built_in">NSString</span> *<span class="keyword">const</span> <span class="built_in">NSKeyValueChangeIndexesKey</span>;
+FOUNDATION_EXPORT <span class="built_in">NSString</span> *<span class="keyword">const</span> <span class="built_in">NSKeyValueChangeNotificationIsPriorKey</span> <span class="built_in">NS_AVAILABLE</span>(<span class="number">10</span>_5, <span class="number">2</span>_0);
+</code></pre><p><strong>使用方法：</strong> </p>
+<pre><code>- (<span class="keyword">void</span>)observeValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath ofObject:(<span class="keyword">id</span>)object change:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *,<span class="keyword">id</span>&gt; *)change context:(<span class="keyword">void</span> *)context
+{
+
+    <span class="keyword">int</span> changeKind = [[change objectForKey:<span class="built_in">NSKeyValueChangeKindKey</span>]intValue];
+    <span class="built_in">NSIndexSet</span> *indexs = [change objectForKey:<span class="built_in">NSKeyValueChangeIndexesKey</span>];
+
+    <span class="keyword">if</span> ([keyPath isEqualToString:<span class="string">@"cousins.array"</span>]) {
+        [indexs enumerateIndexesUsingBlock:^(<span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> * _Nonnull stop) {
+            <span class="keyword">if</span> (changeKind == <span class="built_in">NSKeyValueChangeInsertion</span>) {
+                <span class="built_in">NSLog</span>(<span class="string">@"Insert Action"</span>);
+            }
+            <span class="keyword">else</span> <span class="keyword">if</span>(changeKind == <span class="built_in">NSKeyValueChangeRemoval</span>)
+            {
+                <span class="built_in">NSLog</span>(<span class="string">@"Remove Action"</span>);
+            }
+
+        }];
+        <span class="built_in">NSLog</span>(<span class="string">@"The name of the FIRST child was changed."</span>);
+<span class="comment">//        NSLog(@"%@", change);</span>
+
+    }
+}
+</code></pre><p>其中,<code>NSKeyValueChangeKindKey</code>的值取自于<code>NSKeyValueChange</code>，它的值是由以下枚举定义的：</p>
+<pre><code><span class="keyword">typedef</span> <span class="built_in">NS_ENUM</span>(<span class="built_in">NSUInteger</span>, <span class="built_in">NSKeyValueChange</span>) {
+    <span class="built_in">NSKeyValueChangeSetting</span> = <span class="number">1</span>,
+    <span class="built_in">NSKeyValueChangeInsertion</span> = <span class="number">2</span>,
+    <span class="built_in">NSKeyValueChangeRemoval</span> = <span class="number">3</span>,
+    <span class="built_in">NSKeyValueChangeReplacement</span> = <span class="number">4</span>,
+};
+</code></pre><h3 id="属性发生变化,通知观察者">属性发生变化,通知观察者</h3><blockquote>
+<p>默认情况下是自动发送通知，在这种模式下，当我们修改属性的值时，KVO会自动调用以下两个方法： </p>
+</blockquote>
+<pre><code><span class="pp">- <span class="params">(void)</span>willChangeValueForKey:<span class="params">(<span class="variable">NSString</span> *)</span>key
+- <span class="params">(void)</span>didChangeValueForKey:<span class="params">(<span class="variable">NSString</span> *)</span>key</span>
+</code></pre><p>这两个方法的任务是告诉接收者给定的属性将要或已经被修改。需要注意的是不应该在子类中去重写这两个方法。但如果我们希望自己控制通知发送的一些细节，则可以启用手动控制模式。手动控制通知提供了对KVO更精确控制，它可以控制通知如何以及何时被发送给观察者。采用这种方式可以减少不必要的通知，或者可以将多个修改组合到一个修改中。 </p>
+<p>实现手动通知的类必须重写<code>NSObject</code>中对<code>automaticallyNotifiesObserversForKey:</code>方法的实现。这个方法是在<code>NSKeyValueObserving</code>协议中声明的，其声明如下：</p>
+<pre><code>+ (<span class="built_in">BOOL</span>)automaticallyNotifiesObserversForKey:(<span class="built_in">NSString</span> *)key
+</code></pre><p>这个方法返回一个布尔值(默认是返回YES)，以标识参数key指定的属性是否支持自动KVO。如果我们希望手动去发送通知，则针对指定的属性返回NO。</p>
+<pre><code>+ (<span class="built_in">BOOL</span>)automaticallyNotifiesObserversForKey:(<span class="built_in">NSString</span> *)key
+{
+    <span class="built_in">BOOL</span> automatic = <span class="literal">YES</span>;
+    <span class="keyword">if</span> ([key isEqualToString:<span class="string">@"key"</span>]) {
+        <span class="keyword">return</span> automatic;
+    }
+    <span class="comment">//其他属性,使用父类的处理方式</span>
+    <span class="keyword">return</span> [<span class="keyword">super</span> automaticallyNotifiesObserversForKey:key];
+}
+</code></pre><p>手动处理相关属性的kvo通知: </p>
+<pre><code>- (<span class="typename">void</span>)<span class="string">setName:</span>(NSString *)name
+{
+    <span class="keyword">if</span> (_name != name) {
+        [self <span class="string">willChangeValueForKey:</span>@<span class="string">"name"</span>];
+        _name = name;
+        [self <span class="string">didChangeValueForKey:</span>@<span class="string">"name"</span>];
+    }
+}
+</code></pre><p><strong>如果我们在setter方法之外改变了实例变量(如_bankCodeEn)，且希望这种修改被观察者监听到，则需要像在setter方法里面做一样的处理。这也涉及到我们通常会遇到的一个问题，在类的内部，对于一个属性值，何时用属性(self.bankCodeEn)访问而何时用实例变量(_bankCodeEn)访问。一般的建议是，在获取属性值时，可以用实例变量，在设置属性值时，尽量用setter方法，以保证属性的KVO特性。当然，性能也是一个考量，在设置值时，使用实例变量比使用属性设置值的性能高不少。</strong></p>
+<p>这里可以看下唐巧的文章： <a href="http://blog.devtang.com/2015/03/15/ios-dev-controversy-1/#KVO__u548C_KVC" target="_blank" rel="external">iOS 开发中的争议（一）（属性相关和变量)</a></p>
+<h3 id="计算属性(属性的变化依赖其他属性)">计算属性(属性的变化依赖其他属性)</h3><p>有时候，我们的监听的某个属性可能会依赖于其它多个属性的变化(可以称之为计算属性)，不管所依赖的哪个属性发生了变化，都会导致计算属性的变化。</p>
+<p>Foundation 框架提供的表示属性依赖的机制如下：</p>
+<pre><code>+ <span class="list">(<span class="keyword">NSSet</span> <span class="variable">*)keyPathsForValuesAffectingValueForKey:(NSString *</span>)</span>key
+</code></pre><p>或者更为详细的用法如下：</p>
+<pre><code>+ (NSSet <span class="keyword">*</span>)keyPathsForValuesAffecting<span class="variable">&lt;键名&gt;</span>
+</code></pre><p>使用方法:</p>
+<pre><code>+ (<span class="built_in">NSSet</span> *)keyPathsForValuesAffectingValuesForKey:(<span class="built_in">NSString</span> *)key
+{
+    <span class="built_in">NSSet</span> *keyPaths = [<span class="keyword">super</span> keyPathsForValuesAffectingValueForKey:key];
+    <span class="keyword">if</span> ([key isEqualToString:<span class="string">@"fullName"</span>]) {
+        keyPaths = [keyPaths setByAddingObjectsFromArray:[<span class="built_in">NSArray</span> arrayWithObjects:<span class="string">@"firstName"</span>, <span class="string">@"lastName"</span>,<span class="literal">nil</span>]];
+    }
+    <span class="keyword">return</span> keyPaths;
+}
+
+<span class="comment">//建议使用下面的语法,可以让依赖关系更加的明确</span>
+
++ (<span class="built_in">NSSet</span> *)keyPathsForValuesAffectingFullName
+{
+    <span class="built_in">NSSet</span> *keyPaths = [<span class="built_in">NSSet</span> setWithArray:[<span class="built_in">NSArray</span> arrayWithObjects:<span class="string">@"firstName"</span>, <span class="string">@"lastName"</span>,<span class="literal">nil</span>]];
+    <span class="keyword">return</span> keyPaths;
+}
+</code></pre><p>需要注意的就是当我们重写<code>+keyPathsForValuesAffectingValueForKey</code>:时，需要去调用super的对应方法，并返回一个包含父类中可能会对key指定属性产生影响的属性集合。</p>
+<h3 id="集合属性的监听">集合属性的监听</h3><h4 id="方法1:(实现集合代理对象的相关操作方法)">方法1:(实现集合代理对象的相关操作方法)</h4><p>对于集合的KVO，需要了解的一点是，KVO旨在观察关系(relationship)而不是集合。对于不可变集合属性，我们更多的是把它当成一个整体来监听，而无法去监听集合中的某个元素的变化；对于可变集合属性，实际上也是当成一个整体，去监听它整体的变化，如添加、删除和替换元素。</p>
+<p>在<code>KVC</code>中，我们可以使用集合代理对象<code>(collection proxy object)</code>来处理集合相关的操作。<strong>可变数组</strong>需要实现以下几个方法：(siblings为相关的数组名称,也就是key) </p>
+<pre><code><span class="comment">// 至少实现一个插入方法和一个删除方法</span>
+-<span class="ruby"><span class="symbol">insertObject:</span><span class="keyword">in</span>&lt;<span class="constant">Key</span>&gt;<span class="constant">AtIndex</span><span class="symbol">:</span>
+</span>-<span class="ruby">removeObjectFrom&lt;<span class="constant">Key</span>&gt;<span class="constant">AtIndex</span><span class="symbol">:</span>
+</span>-<span class="ruby">insert&lt;<span class="constant">Key</span>&gt;<span class="symbol">:atIndexes</span><span class="symbol">:</span>
+</span>-<span class="ruby">remove&lt;<span class="constant">Key</span>&gt;<span class="constant">AtIndexes</span><span class="symbol">:</span>
+</span><span class="comment">
+// 可选（增强性能）以下方法二选一</span>
+-<span class="ruby">replaceObjectIn&lt;<span class="constant">Key</span>&gt;<span class="constant">AtIndex</span><span class="symbol">:withObject</span><span class="symbol">:</span>
+</span>-<span class="ruby">replace&lt;<span class="constant">Key</span>&gt;<span class="constant">AtIndexes</span><span class="symbol">:with&lt;Key&gt;</span><span class="symbol">:</span></span>
+</code></pre><p>这些方法分别对应插入、删除和替换，有批量操作的，也有只改变一个对象的方法。可以根据实际需要来实现。</p>
+<p>实现以上方法后，对于可变数组，当调用kvc访问这个数组的时候，就会返回一个由<strong>以上方法调用数组相关操作方法的代理数组对象。</strong>这个代理数组对象支持所有正常的<code>NSMutableArray</code>调用。换句话说，调用者并不知道返回的是一个真正的<code>NSMutableArray</code>，还是一个代理的数组。</p>
+<h4 id="方法2:使用mutableArrayValueForKey方法">方法2:使用<code>mutableArrayValueForKey</code>方法</h4><p>对于可变集合，通常不使用<code>valueForKey:</code>来获取代理对象，而是使用以下方法：</p>
+<pre><code><span class="tag">-</span> (<span class="tag">NSMutableArray</span> *)<span class="rule"><span class="attribute">mutableArrayValueForKey</span>:<span class="value">(NSString *)key</span></span>;
+</code></pre><p>通过这个方法，可以将可变数组与强大的KVO结合在一起。KVO机制能在集合改变的时候把详细的变化放进change字典中。</p>
+<h3 id="相关文章："><strong>相关文章：</strong></h3><ul>
+<li><a href="http://blog.devtang.com/2015/03/15/ios-dev-controversy-1/#KVO__u548C_KVC" target="_blank" rel="external">iOS 开发中的争议（一）（属性相关和变量)</a></li>
+<li><a href="http://southpeak.github.io/blog/2015/04/23/cocoa-foundation-nskeyvalueobserving/" target="_blank" rel="external">kvo的使用</a></li>
+<li><a href="http://objccn.io/issue-7-3ndation-nskeyvalueobserving/" target="_blank" rel="external">KVO&amp;KVC</a></li>
 </ul>
 </div>
 
